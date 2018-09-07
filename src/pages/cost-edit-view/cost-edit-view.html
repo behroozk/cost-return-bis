@@ -1,0 +1,528 @@
+<!--
+  Generated template for the ReviewInputsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Preview</ion-title>
+    <ion-buttons (click)="showLegends()" end>
+      <button ion-button>
+        <ion-icon name="alert"></ion-icon>
+      </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content *ngIf="vegetable">
+    <div *ngIf="vegetable == 'carrots'; else cabbage">
+      <ion-grid>
+        <div id="input_costs">
+          <h6>Inputs Cost</h6>
+            <ion-row>
+              <ion-col col-8 class="input_costs_name_seed">
+                Seedlings
+              </ion-col>
+              <ion-col col-4 class="input_costs_price_seed">
+                {{ _new_majorCosts[0].costName }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-8 class="input_costs_name_fert">
+                Fertilizer
+              </ion-col>
+            <ion-col col-4 class="input_costs_price_fert">
+                {{ _new_majorCosts[1].costName }}
+            </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-8 class="input_costs_name_pest">
+                Pesticide (Insecticide & Fungicide) meter
+              </ion-col>
+              <ion-col col-4 class="input_costs_price_pest">
+                {{ _new_majorCosts[2].costName }}
+              </ion-col>
+            </ion-row>
+          </div>
+          <div id="input_costs_subtotal">
+            <ion-row>
+              <ion-col col-8 class="sub_input_costs_name">
+                Subtotal
+              </ion-col>
+              <ion-col col-4 class="sub_input_costs_price">
+                {{ _new_subTotalinputCost }}
+              </ion-col>
+            </ion-row>
+          </div>
+          <div id="labor_cost_header">
+            <h6>Labor Cost</h6>
+            <ion-row text-wrap text-center>
+                <ion-col col-3>
+                    <p id="label_labor_cost">NP</p>
+                </ion-col>
+                <ion-col col-3>
+                    <p id="label_labor_cost">MD</p>
+                </ion-col>
+                <ion-col col-3>
+                    <p id="label_labor_cost">LC/D</p>
+                </ion-col>
+                <ion-col col-3>
+                    <p id="label_labor_cost">TC/L</p>
+                </ion-col>
+            </ion-row>
+          </div>
+          <div text-wrap text-center class="labor_name">
+            <h6>Clearing</h6>
+              <ion-row id="labor_content_header">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[0].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[0].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[3].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[0].cost }}
+                </ion-col>
+              </ion-row>
+            <h6>Bed Operations</h6>
+              <ion-row id="labor_content_header">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[1].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                 {{ _new_labor_details[1].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[4].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[1].cost }}
+                </ion-col>
+              </ion-row>
+            <h6>Planting</h6>
+              <ion-row id="labor_content_header">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[2].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[2].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[5].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[2].cost }}
+                </ion-col>
+              </ion-row>
+            <h6 >Hilling Up</h6>
+              <ion-row id="labor_content_header">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[3].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[3].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[6].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[3].cost }}
+                </ion-col>
+              </ion-row>
+            <h6 >Spraying</h6>
+              <ion-row id="labor_content_header">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[4].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[4].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[7].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[4].cost }}
+                </ion-col>
+              </ion-row>
+            <h6 >Harvest</h6>
+              <ion-row id="labor_content_header_harvest">
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[5].manpower }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[5].days }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_majorCosts[8].costName }}
+                </ion-col>
+                <ion-col col-3 id="labor_content">
+                  {{ _new_labor_details[5].cost }}
+                </ion-col>
+              </ion-row>
+          </div>
+          <div>
+            <ion-row class="_subtotalLabor">
+              <ion-col col-9>
+                Subtotal
+              </ion-col>
+              <ion-col col-3>
+                {{ _new_subTotalLaborCost }}
+              </ion-col>
+            </ion-row>
+          </div>
+          <div text-wrap id="admin_cost">
+            <ion-row>
+              <ion-col col-9 class="_adminCost">
+                Administrative Cost (per month)
+              </ion-col>
+              <ion-col col-3 class="_adminCost">
+                {{ _new_majorCosts[9].costName }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-9 class="_adminCost">
+                Land Rental
+              </ion-col>
+              <ion-col col-3 class="_adminCost">
+                {{ _new_majorCosts[10].costName }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-9 class="_adminCost">
+                Packing Materials and Transportation
+              </ion-col>
+              <ion-col col-3 class="_adminCost">
+                {{ _new_majorCosts[11].costName }}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-9 class="_adminCost">
+                Overhead and Contingency (10%)
+              </ion-col>
+              <ion-col col-3 class="_adminCost">
+                  {{ _new_majorCosts[12].costName }}
+              </ion-col>
+            </ion-row>
+          </div>
+          <div id="subtotal">
+            <ion-row>
+              <ion-col col-9 class="_adminCost">
+                Subtotal
+              </ion-col>
+              <ion-col col-3 class="_adminCost">
+                {{ _new_subTotalAdminCost }}
+              </ion-col>
+            </ion-row>
+          </div>
+
+  </ion-grid>
+    </div>
+<ng-template #cabbage>
+  <ion-grid>
+    <div id="input_costs">
+      <h6>Inputs Cost</h6>
+        <ion-row>
+          <ion-col col-8>
+            Seedlings
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_majorCosts[0].costName }}
+          </ion-col>
+        </ion-row>
+      <ion-row>
+        <ion-col col-8>
+          Fertilizer
+        </ion-col>
+        <ion-col col-4>
+          {{ _new_majorCosts[1].costName }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-8>
+          Lime
+        </ion-col>
+        <ion-col col-4>
+          {{ _new_majorCosts[2].costName }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-8>
+          Pesticide (Insecticide & Fungicide) meter
+        </ion-col>
+        <ion-col col-4>
+          {{ _new_majorCosts[3].costName }}
+        </ion-col>
+      </ion-row>
+      </div>
+      <div id="subtotal">
+      <ion-row>
+        <ion-col col-8>
+          <h6>Subtotal :</h6>
+        </ion-col>
+        <ion-col col-4>
+          {{ _new_subTotalinputCost }}
+        </ion-col>
+      </ion-row>
+      </div>
+
+  </ion-grid>
+  <ion-grid>
+
+        <h6>Labor Cost</h6>
+        <ion-row text-wrap text-center>
+          <ion-col col-3>
+              <p id="label_labor_cost">NP</p>
+          </ion-col>
+          <ion-col col-3>
+              <p id="label_labor_cost">MD</p>
+          </ion-col>
+          <ion-col col-3>
+              <p id="label_labor_cost">LC/D</p>
+          </ion-col>
+          <ion-col col-3>
+              <p id="label_labor_cost">TC/L</p>
+          </ion-col>
+        </ion-row>
+      <div text-wrap text-center>
+        <h6 >Tilage</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[0].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+           {{ _new_labor_details[0].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[4].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[0].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Digging</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[1].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+           {{ _new_labor_details[1].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[5].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[1].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Planting</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[2].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[2].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[6].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[2].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Spraying</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[3].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[3].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[7].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[3].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Hilling Up</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[4].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[4].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[8].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[4].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Irrigation</h6>
+        <ion-row id="labor_content_header">
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[5].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[5].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[9].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[5].cost }}
+          </ion-col>
+        </ion-row>
+        <h6 >Harvest</h6>
+        <ion-row id="labor_content_header_harvest">
+          <ion-col col-3 id="labor_content">
+        {{ _new_labor_details[6].manpower }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[6].days }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_majorCosts[10].costName }}
+          </ion-col>
+          <ion-col col-3 id="labor_content">
+            {{ _new_labor_details[6].cost }}
+          </ion-col>
+        </ion-row>
+      </div>
+      <div id="subtotal_labor">
+        <ion-row >
+          <ion-col col-9>
+            Subtotal
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_subTotalLaborCost }}
+          </ion-col>
+        </ion-row>
+      </div>
+
+  </ion-grid>
+  <ion-grid>
+
+      <div text-wrap id="admin_cost">
+        <ion-row>
+          <ion-col col-9>
+            <h6>Administrative Cost (per month)</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_majorCosts[11].costName }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-9>
+            <h6>Land Rental</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_majorCosts[12].costName }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-9>
+            <h6>Packing Materials</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_majorCosts[13].costName }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-9>
+            <h6>Transportation</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_majorCosts[14].costName }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-9>
+            <h6>Overhead and Contingency (10%)</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_majorCosts[15].costName }}
+          </ion-col>
+        </ion-row>
+      </div>
+      <div id="subtotal">
+        <ion-row>
+          <ion-col col-9>
+            <h6>Subtotal :</h6>
+          </ion-col>
+          <ion-col col-3>
+            {{ _new_subTotalAdminCost }}
+          </ion-col>
+        </ion-row>
+      </div>
+
+  </ion-grid>
+</ng-template>
+<!--
+    <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            Gain Total :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_gain }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            Cost Total :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_cost }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            ROI Result :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_roiPercentage }}%
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            Money Return :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_returnMoney }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            Expected Kilo :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_harvest_kilo }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            Expected Price :
+          </ion-col>
+          <ion-col col-4>
+            {{ _new_price_per_kilo }}
+          </ion-col>
+        </ion-row>
+    </ion-grid> -->
+    <ion-card>
+    <ion-card-header>
+      Summary
+    </ion-card-header>
+    <ion-card-content>
+      <!-- The updated cost in your farm in 1 hectare is <b>{{ _new_cost }}</b> pesos. If the expected harvest on your farm in Kilo is <b>{{ _new_harvest_kilo }}</b> and the price/kilo in the market is <b>{{ _new_price_per_kilo }}</b> then your revenue will be <b>{{ _new_gain }}</b> pesos. Your profit is about <b>{{ _new_returnMoney }}</b> -->
+      Ang updated nga gasto saimung 1 ka ektarya nga ge uma kay <b>{{ _cost }}</b> pesos. Kung ang gilauman nimo nga harvest saimung uma kay <b>{{ harvest_kilo }}</b> kilo/s og ang presyo/kilo sa merkado kay <b>{{ price_per_kilo }}</b> og ang imung halin kay mukabat sa <b>{{ _gain }}</b> pesos. Ang imung ginansya kay mukabat sa <b>{{ _returnMoney }}</b>
+    </ion-card-content>
+    </ion-card>
+    <button block ion-button (click)="exitPage()">Save Data</button>
+</ion-content>

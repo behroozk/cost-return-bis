@@ -1,0 +1,462 @@
+<!--
+  Generated template for the CarrotsInputsLaborCostsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Vegetables Costs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+  <ion-content padding>
+    <div *ngIf="vegetable == 'carrots'; else cabbage">
+    <div id="input_cost">
+    <ion-label>Inputs Costs</ion-label>
+      <ion-grid>
+        <ion-row class="row_label">
+          <ion-item>
+           <ion-label><p>Gasto sa binhi per lata?</p></ion-label>
+           <ion-toggle [disabled]='false' [(ngModel)]="toggleValue" (ionChange)="activatePopup()" style='zoom:0.8;'></ion-toggle>
+         </ion-item>
+         <ion-item *ngIf="toggleValue">
+           <ion-label stacked>Binhi</ion-label>
+           <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="input_cost[0]" value="{{ default_Pay}}"></ion-input>
+         </ion-item>
+         <ion-item *ngIf="_can">
+           <ion-label stacked>Pila kabuok lata?</ion-label>
+           <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="_numCans" value="{{ default_Day}}"></ion-input>
+         </ion-item>
+        <!-- <ng-template #_can> -->
+
+        <!-- </ng-template> -->
+        </ion-row>
+        <ion-row>
+          <ion-item>
+              <ion-label stacked>Fertilizer</ion-label>
+              <ion-input type="number" pattern="[0-9]*" [(ngModel)]="input_cost[1]" placeholder="Enter Cost" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+        <ion-row class="row_label">
+          <ion-item>
+            <ion-label stacked>Pesticide (Insecticide & Fungicide)</ion-label>
+            <ion-input type="number" pattern="[0-9]*" [(ngModel)]="input_cost[2]" placeholder="Enter Cost" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div id="labor_cost" padding >
+    <h5>Labor Cost</h5>
+    <ion-grid>
+      <ion-label>Clearing</ion-label>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Man Power</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[0]" value="{{ default_Day }}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Number of Days</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[0]" value="{{ default_Day }}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Cost per Day</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[0]" value="{{ default_Pay}}"></ion-input>
+        </ion-item>
+      </ion-row>
+
+    <ion-label>Bed Operations</ion-label>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Man Power</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[1]" value="{{ default_Day }}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Number of Days</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[1]" value="{{ default_Day }}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Cost per Day</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[1]" value="{{ default_Pay}}"></ion-input>
+        </ion-item>
+      </ion-row>
+
+    <h6>Planting</h6>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Man Power</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[2]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Number of Days</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[2]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Cost per Day</ion-label>
+        <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[2]" value="{{ default_Pay}}"></ion-input>
+      </ion-item>
+    </ion-row>
+
+
+    <h6>Hilling Up</h6>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Man Power</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[3]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Number of Days</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[3]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Cost per Day</ion-label>
+        <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[3]" value="{{ default_Pay}}"></ion-input>
+      </ion-item>
+    </ion-row>
+
+
+    <h6>Spraying</h6>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Man Power</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[4]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Number of Days</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[4]" value="{{ default_Day }}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Cost per Day</ion-label>
+        <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[4]" value="{{ default_Pay}}"></ion-input>
+      </ion-item>
+    </ion-row>
+
+
+     <h6>Harvest</h6>
+     <ion-row>
+       <ion-col col-6>
+         <ion-item>
+           <ion-label stacked>Man Power</ion-label>
+           <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[5]" value="{{ default_Day }}"></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col col-6>
+         <ion-item>
+           <ion-label stacked>Number of Days</ion-label>
+           <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[5]" value="{{ default_Day }}"></ion-input>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-item>
+         <ion-label stacked>Cost per Day</ion-label>
+         <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[5]" value="{{ default_Pay}}"></ion-input>
+       </ion-item>
+     </ion-row>
+    </ion-grid>
+    </div>
+
+    <div id="admin_cost" padding >
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Administrative Cost (per month)</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_adminCost[0]" value="{{ default_Pay }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Land Rental</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[1]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row_label">
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Packing Materials and Transportation</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[2]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Overhead and Contingency (10%)</ion-label>
+                <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[3]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+      <ng-template #cabbage>
+        <div id="input_cost" padding >
+        <ion-label>Inputs Costs</ion-label>
+          <ion-grid>
+            <ion-row class="row_label">
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label stacked>Seedlings</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="input_cost[0]" value="{{ default_Pay}}"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label stacked color="primary">Fertilizer</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="input_cost[1]" placeholder="Enter Cost" value="{{ default_Pay}}"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label stacked color="primary">Lime</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="input_cost[2]" placeholder="Enter Cost" value="{{ default_Pay}}"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="row_label">
+                <ion-item>
+                  <ion-label stacked color="primary">Pesticide (Insecticide & Fungicide)</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="input_cost[3]" placeholder="Enter Cost" value="{{ default_Pay}}"></ion-input>
+                </ion-item>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <div id="labor_cost" padding >
+        <h5>Labor Cost</h5>
+        <ion-grid>
+        <h6>Tilage</h6>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[0]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[0]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[0]" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+        <h6>Digging</h6>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[1]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[1]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[1]" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+
+        <h6>Planting</h6>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[2]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[2]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[2]" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+
+        <h6>Spraying</h6>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[3]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[3]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[3]" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+
+        <h6>Hilling Up</h6>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[4]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[4]" value="{{ default_Day }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[4]" value="{{ default_Pay}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+
+         <h6>Irrigation</h6>
+         <ion-row>
+           <ion-col col-6>
+             <ion-item>
+               <ion-label stacked>Man Power</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[5]" value="{{ default_Day }}"></ion-input>
+             </ion-item>
+           </ion-col>
+           <ion-col col-6>
+             <ion-item>
+               <ion-label stacked>Number of Days</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[5]" value="{{ default_Day }}"></ion-input>
+             </ion-item>
+           </ion-col>
+         </ion-row>
+         <ion-row>
+           <ion-item>
+             <ion-label stacked>Cost per Day</ion-label>
+             <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[5]" value="{{ default_Pay}}"></ion-input>
+           </ion-item>
+         </ion-row>
+
+         <h6>Irrigation</h6>
+         <ion-row>
+           <ion-col col-6>
+             <ion-item>
+               <ion-label stacked>Man Power</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numLabor[6]" value="{{ default_Day }}"></ion-input>
+             </ion-item>
+           </ion-col>
+           <ion-col col-6>
+             <ion-item>
+               <ion-label stacked>Number of Days</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_numDays[6]" value="{{ default_Day }}"></ion-input>
+             </ion-item>
+           </ion-col>
+         </ion-row>
+         <ion-row>
+           <ion-item>
+             <ion-label stacked>Cost per Day</ion-label>
+             <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[6]" value="{{ default_Pay}}"></ion-input>
+           </ion-item>
+         </ion-row>
+         </ion-grid>
+        </div>
+
+        <div id="admin_cost" padding >
+            <ion-grid>
+              <ion-row class="row_label">
+                <ion-col col-6>
+                  <ion-item>
+                    <ion-label stacked color="primary">Administrative Cost (per month)</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_adminCost[0]" value="{{ default_Pay }}"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-6>
+                  <ion-item>
+                    <ion-label stacked color="primary">Land Rental</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[1]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row_label">
+                <ion-col col-6>
+                  <ion-item>
+                    <ion-label stacked color="primary">Packing Materials</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[2]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-6>
+                  <ion-item>
+                    <ion-label stacked color="primary">Transportation</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[3]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row_label">
+                <ion-item>
+                  <ion-label stacked color="primary">Overhead and Contingency (10%)</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_adminCost[4]" placeholder="Enter Cost" value="{{ default_Pay }}"></ion-input>
+                </ion-item>
+              </ion-row>
+            </ion-grid>
+          </div>
+      </ng-template>
+      <button ion-button block color="secondary" (click)="registerInputs()">Register Input</button>
+  </ion-content>

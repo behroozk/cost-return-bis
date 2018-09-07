@@ -1,0 +1,41 @@
+page-review-inputs {
+  div#seedlings{
+      border: 3px solid black;
+      margin-bottom: 2%;
+  }
+  div#input_costs{
+    border: 3px solid black;
+    margin-bottom: 2%;
+  }
+  div#subtotal{
+    border: 3px solid green;
+  }
+  div#subtotal_labor{
+    border: 3px solid green;
+    margin-bottom: 5%;
+  }
+  h6#labor_title{
+    border: 1px solid black;
+    background-color: #33cc33;
+    margin:0px;
+    padding: 5px;
+  }
+  ion-row#labor_content_header{
+    margin-bottom: 10%;
+  }
+  ion-row#labor_content_header_harvest{
+    margin-bottom: 5%;
+  }
+  ion-col#labor_content{
+    border: 1px solid black;
+  }
+  div#admin_cost{
+    border: 3px solid black;
+    margin-bottom: 3%;
+  }
+  div#labor_cost_header{
+    border: 3px solid black;
+    margin-bottom: 3%;
+    margin-top: 3%;
+  }
+}

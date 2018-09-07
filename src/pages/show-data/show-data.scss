@@ -1,0 +1,13 @@
+page-show-data {
+ion-item:hover { background-color: green !important; }
+p { color: black !important; }
+.aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60%;
+}
+.center_item {
+  max-width: 50%;
+}
+}

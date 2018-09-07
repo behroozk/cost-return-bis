@@ -1,0 +1,44 @@
+<ion-content padding>
+  <h2 text-center>Note: Palihug og fill up sa mga pangutana sa ubos</h2>
+   <form [formGroup]="client" (ngSubmit)="clientForm(client.value)" class="form_client">
+    <ion-item>
+      <ion-label floating>Ngalan</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Edad</ion-label>
+      <ion-input type="number" formControlName="age"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="location == 'Lirongan'">
+      <ion-label floating>Lugar</ion-label>
+      <ion-select formControlName="location">
+        <ion-option value="L">Sentro Lirongan</ion-option>
+        <ion-option value="LA">Awang</ion-option>
+        <ion-option value="LC">Camantiya</ion-option>
+        <ion-option value="LK">Kinolongon</ion-option>
+        <ion-option value="LKA">Kaulayanan</ion-option>
+        <ion-option value="LM">Magsaysay</ion-option>
+        <ion-option value="LPA">Pawagaon</ion-option>
+        <ion-option value="LT">Timago</ion-option>
+        <ion-option value="LTA">Tangkulan</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="location == 'Miarayon'">
+      <ion-label floating>Lugar</ion-label>
+      <ion-select formControlName="location">
+        <ion-option value="MP1">Purok 1</ion-option>
+        <ion-option value="MP2">Purok 2</ion-option>
+        <ion-option value="MP3">Purok 3</ion-option>
+        <ion-option value="MP4">Purok 4</ion-option>
+        <ion-option value="MA">Abel</ion-option>
+        <ion-option value="MAN">Analagan</ion-option>
+        <ion-option value="MM">Malantaw</ion-option>
+        <ion-option value="MNAP">Napayan</ion-option>
+        <ion-option value="MP">Puntol</ion-option>
+        <ion-option value="MS">Sulavic</ion-option>
+        <ion-option value="MVV">Vistan Village</ion-option>
+      </ion-select>
+    </ion-item>
+     <button ion-button type="submit" [disabled]="!client.valid">Submit</button>
+  </form>
+</ion-content>

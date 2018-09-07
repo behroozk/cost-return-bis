@@ -1,0 +1,43 @@
+<!--
+  Generated template for the ChooseVegetablePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="_pageTitle">
+
+  <!-- <ion-navbar>
+    <ion-title>i-CHiVES</ion-title>
+    <button ion-button menuToggle>Toggle Menu</button>
+  </ion-navbar> -->
+  <ion-navbar color="navBar">
+      <ion-title>
+        CostReturn
+      </ion-title>
+      <button class="profile" end ion-button menuToggle (click)="openMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding padding text-center>
+    <ion-img width="65" height="65" src="./assets/imgs/Aggies.png"></ion-img>
+    <ion-img width="65" height="65" src="./assets/imgs/XU-Logo.png"></ion-img>
+    <ion-img width="65" height="65" src="./assets/imgs/LGU.png"></ion-img>
+    <ion-img width="65" height="65" src="./assets/imgs/CHED.png"></ion-img>
+    <h4>Kini nga application makatabang sa pag monitor sa mga galastohunon og ang kwarta nga nabalik gikan sa gasto sa pag-uma</h4>
+    <p>Palihug og pili sa utanon sa ubos</p>
+    <!-- <h4>This application will help you monitor the cost and return that was spend by the farmers</h4>
+    <p>Please select vegetable below</p> -->
+    <button ion-button (click)="calculateCarrots()">Carrots</button>
+    <button ion-button (click)="calculateCabbage()">Cabbage</button>
+</ion-content>
+<ion-footer id="title">
+  <ion-row>
+        <small>Developed by: I-CHiVES</small>
+  </ion-row>
+  <ion-row>
+        <small>Xavier University - College of Agriculture</small>
+  </ion-row>
+</ion-footer>

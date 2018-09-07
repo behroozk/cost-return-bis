@@ -1,0 +1,475 @@
+<!--
+  Generated template for the TabCostPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cost</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="vegetable == 'carrots'; else cabbage">
+  <ion-grid>
+    <div *ngFor="let item of tabCost">
+      <div *ngFor="let subtotal of _subtotalCost">
+    <div id="seedlings">
+    <ion-row >
+      <ion-col col-8>
+        <p>Seedlings</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.seedlings }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+    <h6 padding id="title_header">Inputs</h6>
+    <div id="inputs">
+    <ion-row>
+      <ion-col col-8>
+        <p>Fertilizer</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.fertilizer }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <p>Pesticide</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.pesticide }}</p>
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal_inputs">
+    <ion-row>
+      <ion-col col-8>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-4>
+        <h6>{{ subtotal._inputs }}</h6>
+      </ion-col>
+    </ion-row>
+    </div>
+    <h6 padding id="title_header">Labor Cost</h6>
+    <div id="labor_cost_header">
+    <ion-row text-wrap text-center>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">NP</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">MD</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">LC/D</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">TC/L</p>
+        </ion-col>
+    </ion-row>
+    </div>
+    <div text-center text-wrap *ngFor="let labor_details of _labor">
+    <h6 id="labor_header">Clearing</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{  labor_details._clearingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._clearingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ item.clearing }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._clearing_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Bed Operations</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._bed_operationsNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._bed_operationsMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ item.bed_operations }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._bed_operations_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Planting</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._plantingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._plantingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.planting }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._planting_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Hilling Up</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_upNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_upMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.hilling_up }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_up_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Spraying</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._sprayingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._sprayingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.spraying }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._spraying_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Harvest</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvestNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvestMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.harvest }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvest_t }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-3>
+        <h6>{{ subtotal._labor }}</h6>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div id="admin_cost" text-wrap>
+    <ion-row>
+      <ion-col col-9>
+        <p>Administrative Cost (per month)</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.administrative_Cost }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Land Rental</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.land_rental }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Packing Materials and Transportation</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.packingMT }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Overhead and Contingency (10%)</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.overhead_contigency }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-3>
+        <h6>{{ subtotal._admin }}</h6>
+      </ion-col>
+    </ion-row>
+  </div>
+  </div>
+  </div>
+  </ion-grid>
+</div>
+<ng-template #cabbage>
+  <ion-grid>
+    <div *ngFor="let item of tabCost">
+      <div *ngFor="let subtotal of _subtotalCost">
+    <div id="seedlings">
+    <ion-row >
+      <ion-col col-8>
+        <p>Seedlings</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.seedlings }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+    <h6 padding id="title_header">Inputs</h6>
+    <div id="inputs">
+    <ion-row>
+      <ion-col col-8>
+        <p>Fertilizer</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.fertilizer }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <p>Lime</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.lime }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <p>Pesticide</p>
+      </ion-col>
+      <ion-col col-4>
+        <p>{{ item.pesticide }}</p>
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal_inputs">
+    <ion-row>
+      <ion-col col-8>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-4>
+        <h6>{{ subtotal._inputs }}</h6>
+      </ion-col>
+    </ion-row>
+    </div>
+    <h6 padding id="title_header">Labor Cost</h6>
+    <div id="labor_cost_header">
+    <ion-row text-wrap text-center>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">NP</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">MD</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">LC/D</p>
+        </ion-col>
+        <ion-col col-3 id="labor_details_style">
+            <p id="label_labor_cost">TC/L</p>
+        </ion-col>
+    </ion-row>
+    </div>
+    <div text-center text-wrap *ngFor="let labor_details of _labor">
+    <h6 id="labor_header">Tilage</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{  labor_details._tilageNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._tilageMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ item.tilage }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._tilage_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Digging</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._diggingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._diggingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ item.digging }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+       <p>{{ labor_details._digging_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Planting</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._plantingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._plantingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.planting }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._planting_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Spraying</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._sprayingNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._sprayingMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.spraying }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._spraying_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Hilling Up</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_upNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_upMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.hilling_up }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._hilling_up_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Irrigation</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._irrigationNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._irrigationMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.irrigation }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._irrigation_t }}</p>
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_header">Harvest</h6>
+    <ion-row>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvestNP }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvestMD }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ item.harvest }}</p>
+      </ion-col>
+      <ion-col col-3 id="labor_details_style">
+        <p>{{ labor_details._harvest_t }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-3>
+        <h6>{{ subtotal._labor }}</h6>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div id="admin_cost" text-wrap>
+    <ion-row>
+      <ion-col col-9>
+        <p>Administrative Cost (per month)</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.administrative_Cost }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Land Rental</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.land_rental }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Packing Materials</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.packingMaterials }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Transportation</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.transportation }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <p>Overhead and Contingency (10%)</p>
+      </ion-col>
+      <ion-col col-3>
+        <p>{{ item.overhead_contigency }}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal</h6>
+      </ion-col>
+      <ion-col col-3>
+        <h6>{{ subtotal._admin }}</h6>
+      </ion-col>
+    </ion-row>
+  </div>
+  </div>
+  </div>
+  </ion-grid>
+</ng-template>
+</ion-content>

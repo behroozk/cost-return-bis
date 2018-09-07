@@ -1,0 +1,456 @@
+<!--
+  Generated template for the CarrotsInputsLaborCostsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Costs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let tCost of tabCost">
+  <div *ngIf="vegetable == 'carrots'; else cabbage">
+      <div id="input_cost">
+      <ion-label>Inputs Costs</ion-label>
+        <ion-grid>
+          <ion-row class="row_label">
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Seedlings</ion-label>
+                <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="new_input_cost[0]" value="{{ tCost.seedlings }}"></ion-input>
+              </ion-item>
+            </ion-col>
+              <ion-col col-6>
+                <ion-item>
+                  <ion-label stacked>Fertilizer</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="new_input_cost[1]" placeholder="Enter Cost" value="{{ tCost.fertilizer }}"></ion-input>
+                </ion-item>
+              </ion-col>
+          </ion-row>
+          <ion-row class="row_label">
+            <ion-item>
+              <ion-label stacked>Pesticide (Insecticide & Fungicide)</ion-label>
+              <ion-input type="number" pattern="[0-9]*" [(ngModel)]="new_input_cost[2]" placeholder="Enter Cost" value="{{ tCost.pesticide }}"></ion-input>
+            </ion-item>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+
+  	<div *ngFor="let lDetails of _new_labor">
+      <div id="labor_cost" padding >
+      <h5>Labor Cost</h5>
+      <ion-grid>
+        <ion-label>Clearing</ion-label>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[0]" value="{{ lDetails._clearingNP }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[0]" value="{{ lDetails._clearingMD }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[0]" value="{{tCost.clearing}}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+      <ion-label>Bed Operations</ion-label>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Man Power</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[1]" value="{{ lDetails._bed_operationsNP }}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label stacked>Number of Days</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[1]" value="{{ lDetails._bed_operationsMD }}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label stacked>Cost per Day</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[1]" value="{{ tCost.bed_operations }}"></ion-input>
+          </ion-item>
+        </ion-row>
+
+      <h6>Planting</h6>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Man Power</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[2]" value="{{ lDetails._plantingNP }}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Number of Days</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[2]" value="{{ lDetails._plantingMD }}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Cost per Day</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[2]" value="{{ tCost.planting }}"></ion-input>
+        </ion-item>
+      </ion-row>
+
+
+      <h6>Hilling Up</h6>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Man Power</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[3]" value="{{ lDetails._hilling_upNP }}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Number of Days</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[3]" value="{{ lDetails._hilling_upMD }}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Cost per Day</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[3]" value="{{ tCost.hilling_up}}"></ion-input>
+        </ion-item>
+      </ion-row>
+
+
+      <h6>Spraying</h6>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Man Power</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[4]" value="{{ lDetails._sprayingNP }}"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Number of Days</ion-label>
+            <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[4]" value="{{ lDetails._sprayingMD }}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Cost per Day</ion-label>
+          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[4]" value="{{ tCost.spraying }}"></ion-input>
+        </ion-item>
+      </ion-row>
+
+
+       <h6>Harvest</h6>
+       <ion-row>
+         <ion-col col-6>
+           <ion-item>
+             <ion-label stacked>Man Power</ion-label>
+             <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[5]" value="{{ lDetails._harvestNP }}"></ion-input>
+           </ion-item>
+         </ion-col>
+         <ion-col col-6>
+           <ion-item>
+             <ion-label stacked>Number of Days</ion-label>
+             <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[5]" value="{{ lDetails._harvestMD }}"></ion-input>
+           </ion-item>
+         </ion-col>
+       </ion-row>
+       <ion-row>
+         <ion-item>
+           <ion-label stacked>Cost per Day</ion-label>
+           <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[5]" value="{{ tCost.harvest }}"></ion-input>
+         </ion-item>
+       </ion-row>
+      </ion-grid>
+      </div>
+  	</div>
+      <div id="admin_cost" padding >
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Administrative Cost (per month)</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_adminCost[0]" value="{{ tCost.administrative_Cost }}"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Land Rental</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[1]" placeholder="Enter Cost" value="{{ tCost.land_rental }}"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="row_label">
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Packing Materials and Transportation</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[2]" placeholder="Enter Cost" value="{{ tCost.packingMT }}"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label stacked>Overhead and Contingency (10%)</ion-label>
+                  <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[3]" placeholder="Enter Cost" value="{{ tCost.overhead_contigency }}"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+        <ng-template #cabbage>
+          <div id="input_cost" padding >
+          <ion-label>Inputs Costs</ion-label>
+            <ion-grid>
+              <ion-row class="row_label">
+                <ion-col col-4>
+                  <ion-item>
+                    <ion-label stacked>Seedlings</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="new_input_cost[0]" value="{{ tCost.seedlings }}"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-4>
+                  <ion-item>
+                    <ion-label stacked color="primary">Fertilizer</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="new_input_cost[1]" placeholder="Enter Cost" value="{{ tCost.fertilizer}}"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-4>
+                  <ion-item>
+                    <ion-label stacked color="primary">Lime</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="new_input_cost[2]" placeholder="Enter Cost" value="{{ tCost.lime}}"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row_label">
+                  <ion-item>
+                    <ion-label stacked color="primary">Pesticide (Insecticide & Fungicide)</ion-label>
+                    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="new_input_cost[3]" placeholder="Enter Cost" value="{{ tCost.pesticide}}"></ion-input>
+                  </ion-item>
+              </ion-row>
+            </ion-grid>
+          </div>
+  	<div *ngFor="let lDetails of _new_labor">
+          <div id="labor_cost" padding >
+          <h5>Labor Cost</h5>
+          <ion-grid>
+          <h6>Tilage</h6>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Man Power</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[0]" value="{{ lDetails._tilageNP }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Number of Days</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[0]" value="{{ lDetails._tilageMD }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label stacked>Cost per Day</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[0]" value="{{ tCost.tilage }}"></ion-input>
+            </ion-item>
+          </ion-row>
+
+          <h6>Digging</h6>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Man Power</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[1]" value="{{ lDetails._diggingNP }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Number of Days</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[1]" value="{{ lDetails._diggingMD }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label stacked>Cost per Day</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[1]" value="{{ tCost.digging }}"></ion-input>
+            </ion-item>
+          </ion-row>
+
+
+          <h6>Planting</h6>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Man Power</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[2]" value="{{ lDetails._plantingNP }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Number of Days</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[2]" value="{{ lDetails._plantingMD }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label stacked>Cost per Day</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[2]" value="{{ tCost.planting }}"></ion-input>
+            </ion-item>
+          </ion-row>
+
+
+          <h6>Spraying</h6>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Man Power</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[3]" value="{{ lDetails._sprayingNP }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Number of Days</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[3]" value="{{ lDetails._sprayingMD }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label stacked>Cost per Day</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[3]" value="{{ tCost.spraying }}"></ion-input>
+            </ion-item>
+          </ion-row>
+
+
+          <h6>Hilling Up</h6>
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Man Power</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[4]" value="{{ lDetails._hilling_upNP }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Number of Days</ion-label>
+                <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[4]" value="{{ lDetails._hilling_upMD }}"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-item>
+              <ion-label stacked>Cost per Day</ion-label>
+              <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[4]" value="{{ tCost.hilling_up }}"></ion-input>
+            </ion-item>
+          </ion-row>
+
+
+           <h6>Irrigation</h6>
+           <ion-row>
+             <ion-col col-6>
+               <ion-item>
+                 <ion-label stacked>Man Power</ion-label>
+                 <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[5]" value="{{ lDetails._irrigationNP }}"></ion-input>
+               </ion-item>
+             </ion-col>
+             <ion-col col-6>
+               <ion-item>
+                 <ion-label stacked>Number of Days</ion-label>
+                 <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[5]" value="{{ lDetails._irrigationMD }}"></ion-input>
+               </ion-item>
+             </ion-col>
+           </ion-row>
+           <ion-row>
+             <ion-item>
+               <ion-label stacked>Cost per Day</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[5]" value="{{ tCost.irrigation }}"></ion-input>
+             </ion-item>
+           </ion-row>
+
+  	<h6>Harvest</h6>
+           <ion-row>
+             <ion-col col-6>
+               <ion-item>
+                 <ion-label stacked>Man Power</ion-label>
+                 <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numLabor[6]" value="{{lDetails._harvestNP}}"></ion-input>
+               </ion-item>
+             </ion-col>
+             <ion-col col-6>
+               <ion-item>
+                 <ion-label stacked>Number of Days</ion-label>
+                 <ion-input type="number" pattern="[0-9]*" placeholder="Number of People" [(ngModel)]="_new_numDays[6]" value="{{lDetails._harvestMD}}"></ion-input>
+               </ion-item>
+             </ion-col>
+           </ion-row>
+           <ion-row>
+             <ion-item>
+               <ion-label stacked>Cost per Day</ion-label>
+               <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_laborCost[6]" value="{{tCost.harvest}}"></ion-input>
+             </ion-item>
+           </ion-row>
+           </ion-grid>
+          </div>
+  	</div>
+            <div id="admin_cost" padding>
+                  <ion-grid>
+                    <ion-row class="row_label">
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label stacked color="primary">Administrative Cost (per month)</ion-label>
+                          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_new_adminCost[0]" value="{{ tCost.administrative_Cost }}"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label stacked color="primary">Land Rental</ion-label>
+                          <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[1]" placeholder="Enter Cost" value="{{ tCost.land_rental }}"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="row_label">
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label stacked color="primary">Packing Materials</ion-label>
+                          <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[2]" placeholder="Enter Cost" value="{{ tCost.packingMaterials }}"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label stacked color="primary">Transportation</ion-label>
+                          <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[3]" placeholder="Enter Cost" value="{{ tCost.transportation }}"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="row_label">
+                      <ion-item>
+                        <ion-label stacked color="primary">Overhead and Contingency (10%)</ion-label>
+                        <ion-input type="number" pattern="[0-9]*" [(ngModel)]="_new_adminCost[4]" placeholder="Enter Cost" value="{{ tCost.overhead_contigency }}"></ion-input>
+                      </ion-item>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+        </ng-template>
+  </div>
+  <button block ion-button color="secondary" (click)="updateInputs()">Update Input</button>
+  </ion-content>

@@ -1,0 +1,97 @@
+<!--
+  Generated template for the ShowDataPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recorded Data</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="!_isEmpty; else showBlank">
+  <ion-card *ngFor="let item of dataRecord">
+    <ion-card-content padding>
+      <ion-card-title>
+        Ngalan sa kleyente : {{ item.name }}
+      </ion-card-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-7>
+            <p>Location Code :</p>
+          </ion-col>
+          <ion-col col-5>
+            <p>{{ item.location }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-7>
+            <p>Gilauman nga Kilo :</p>
+          </ion-col>
+          <ion-col col-5>
+            <p>{{ item.expected_Kilo }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-7>
+            <p>Gilauman nga Presyo:</p>
+          </ion-col>
+          <ion-col col-5>
+            <p>{{ item.expected_Price }}</p>
+          </ion-col>
+        </ion-row>
+     <ion-row>
+       <ion-col col-7>
+         <p>Kinatibuk-ang gasto :</p>
+       </ion-col>
+       <ion-col col-5>
+         <p>{{ item.cost }}</p>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col col-7>
+         <p>Hingpit nga ganansya :</p>
+       </ion-col>
+       <ion-col col-5>
+         <p>{{ item.gain }}</p>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col col-7>
+         <p>Petsa :</p>
+       </ion-col>
+       <ion-col col-5>
+         <p>{{ item.time }}</p>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+    </ion-card-content>
+    <ion-row padding>
+      <ion-col>
+        <button ion-button clear small color="primary" (click)="onItemClicked(item.id)" icon-start>
+          <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+           Detalye
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button clear small color="danger" (click)="openDelete(item.id)" icon-start>
+          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+           Delete
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</div>
+  <ng-template #showBlank>
+    <div  class="aligner">
+      <div class="center_item">
+        <p>Wala pay nakita nga datus nga na record</p>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

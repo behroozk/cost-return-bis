@@ -1,0 +1,471 @@
+<!--
+  Generated template for the ReviewInputsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Preview</ion-title>
+    <ion-buttons (click)="showLegends()" end>
+      <button ion-button>
+        <ion-icon name="alert"></ion-icon>
+      </button>
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <div *ngIf="vegetable == 'carrots'; else cabbage">
+  <ion-grid>
+    <div id="seedlings">
+    <ion-row>
+      <ion-col col-8>
+        Seedlings
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[0] }}
+      </ion-col>
+    </ion-row>
+  </div>
+    <h6>Inputs Cost</h6>
+    <div id="input_costs" text-wrap>
+    <ion-row>
+      <ion-col col-8>
+        Fertilizer
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[1] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        Pesticide (Insecticide & Fungicide) meter
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[2] }}
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal">
+    <ion-row>
+      <ion-col col-8>
+        <h6>Subtotal :</h6>
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray4[0] }}
+      </ion-col>
+    </ion-row>
+    </div>
+
+    <h6>Labor Cost</h6>
+    <div id="labor_cost_header">
+    <ion-row text-wrap text-center>
+        <ion-col col-3>
+            <p id="label_labor_cost">NP</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">MD</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">LC/D</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">TC/L</p>
+        </ion-col>
+    </ion-row>
+    </div>
+    <div text-wrap text-center>
+    <h6 id="labor_title">Clearing</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+       {{ _arrays._storeArray3[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[0]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Bed Operations</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+       {{ _arrays._storeArray3[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[1]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Planting</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[2] }}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Hilling Up</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[3]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Spraying</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[4] }}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Harvest</h6>
+    <ion-row id="labor_content_header_harvest">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[5]}}
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal_labor">
+    <ion-row >
+    <ion-col col-9>
+    Subtotal
+    </ion-col>
+
+      <ion-col col-3>
+        {{ _subLaborCosts }}
+      </ion-col>
+    </ion-row>
+    </div>
+
+  <div text-wrap id="admin_cost">
+    <ion-row>
+      <ion-col col-9>
+        <h6>Administrative Cost (per month)</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[0]}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Land Rental</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[1] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Packing Materials and Transportation</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[2] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Overhead and Contingency (10%)</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[3] }}
+      </ion-col>
+    </ion-row>
+  </div>
+  <div id="subtotal">
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal :</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray4[1] }}
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid>
+</div>
+
+<ng-template #cabbage>
+  <ion-grid>
+    <div id="seedlings">
+    <ion-row>
+      <ion-col col-8>
+        Seedlings
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[0] }}
+      </ion-col>
+    </ion-row>
+  </div>
+    <h6>Inputs Cost</h6>
+    <div id="input_costs" text-wrap>
+    <ion-row>
+      <ion-col col-8>
+        Fertilizer
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[1] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        Lime
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[2] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        Pesticide (Insecticide & Fungicide) meter
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray1[3] }}
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal">
+    <ion-row>
+      <ion-col col-8>
+        <h6>Subtotal :</h6>
+      </ion-col>
+      <ion-col col-4>
+        {{ _arrays._storeArray4[0] }}
+      </ion-col>
+    </ion-row>
+    </div>
+
+    <h6>Labor Cost</h6>
+    <div id="labor_cost_header">
+    <ion-row text-wrap text-center>
+        <ion-col col-3>
+            <p id="label_labor_cost">NP</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">MD</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">LC/D</p>
+        </ion-col>
+        <ion-col col-3>
+            <p id="label_labor_cost">TC/L</p>
+        </ion-col>
+    </ion-row>
+    </div>
+    <div text-wrap text-center>
+    <h6 id="labor_title">Tilage</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+       {{ _arrays._storeArray3[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[0] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[0]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Digging</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+       {{ _arrays._storeArray3[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[1] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[1]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Planting</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[2] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[2] }}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Spraying</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[3] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[3]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Hilling Up</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[4] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[4] }}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Irrigation</h6>
+    <ion-row id="labor_content_header">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[5] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[5]}}
+      </ion-col>
+    </ion-row>
+    <h6 id="labor_title">Harvest</h6>
+    <ion-row id="labor_content_header_harvest">
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray2[6] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray3[6] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray7[6] }}
+      </ion-col>
+      <ion-col col-3 id="labor_content">
+        {{ _arrays._storeArray5[6]}}
+      </ion-col>
+    </ion-row>
+    </div>
+    <div id="subtotal_labor">
+    <ion-row >
+    <ion-col col-9>
+    Subtotal
+    </ion-col>
+
+      <ion-col col-3>
+        {{ _subLaborCosts }}
+      </ion-col>
+    </ion-row>
+    </div>
+
+  <div text-wrap id="admin_cost">
+    <ion-row>
+      <ion-col col-9>
+        <h6>Administrative Cost (per month)</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[0]}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Land Rental</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[1] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Packing Materials</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[2] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Transportation</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[3] }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <h6>Overhead and Contingency (10%)</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray6[4] }}
+      </ion-col>
+    </ion-row>
+  </div>
+  <div id="subtotal">
+    <ion-row>
+      <ion-col col-9>
+        <h6>Subtotal :</h6>
+      </ion-col>
+      <ion-col col-3>
+        {{ _arrays._storeArray4[1] }}
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid>
+</ng-template>
+  <button block ion-button (click)="exitPage()">Save Data</button>
+</ion-content>

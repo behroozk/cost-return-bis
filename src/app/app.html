@@ -1,0 +1,29 @@
+<ion-menu side="right" [content]="mymenu" persistent = 'true' >
+  <ion-content padding text-center>
+  	<ion-list noline>
+	     <ion-item text-center >
+          <ion-avatar>
+            <img src="./assets/imgs/profile/{{userPic}}" class='profilePic'>
+          </ion-avatar>
+          <br>
+          <h2>{{fName}} {{lName}}</h2>
+          <p>{{location}} Para-technician</p>
+	     </ion-item>
+      	<ion-item text-center>
+      		<br>
+      		<button color='secondary' ion-button outline round (click)='changePassword()'>
+      			Change Password
+      	    	<ion-icon name="paper" ></ion-icon>
+      		</button>
+      		<button color='secondary' ion-button outline round (click)='logout()'>
+      			Log-out
+      	    	<ion-icon name="log-out" ></ion-icon>
+      		</button>
+      		<br>
+      	</ion-item>
+	<br><br>
+	</ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mymenu [root]="rootPage"></ion-nav>
