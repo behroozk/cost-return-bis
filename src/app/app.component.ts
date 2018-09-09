@@ -5,14 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import { MenudatabasePage } from '../pages/menudatabase/menudatabase';
 // import { HomePage } from '../pages/home/home';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { ChooseVegetablePage } from '../pages/choose-vegetable/choose-vegetable';
+// import { ChooseVegetablePage } from '../pages/choose-vegetable/choose-vegetable';
 import { LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = ChooseVegetablePage;
+  rootPage:any = LoginPage;
   rowid:any;
   fName:any;
   lName:any;
@@ -61,6 +61,18 @@ export class MyApp {
         db.executeSql('CREATE TABLE IF NOT EXISTS client_details(rowid INTEGER PRIMARY KEY, client_name TEXT, client_age TEXT, client_location TEXT, date_recorded TEXT)',{})
         .then(res => console.log('Executed client details'));
         }).catch(e => console.log(e.message));
+        db.executeSql('CREATE TABLE IF NOT EXISTS can_prices(rowid INTEGER PRIMARY KEY, vegetable TEXT, brand_name TEXT, price INTEGER)',{})
+          .then(res =>{
+              db.executeSql('SELECT * FROM `can_prices`', {})
+              .then(res=>{
+                if(res.rows.length <=0) {
+                  db.executeSql("INSERT INTO can_prices (vegetable,brand_name,price) VALUES('carrots','Takiis','1200')", {})
+                  .then(res =>{
+                    console.log("Executed can prices");
+                  }).catch(e => alert("can message "+e.message));
+                }
+              }).catch(e => alert("can message "+e.message));
+          }).catch(e => alert("can message "+e.message));
       }).catch(e => console.log('2ND SQL:'+e.message));
       statusBar.styleDefault();
       splashScreen.hide();

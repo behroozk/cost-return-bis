@@ -28,6 +28,12 @@
            <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="input_cost[0]" value="{{ default_Pay}}"></ion-input>
          </ion-item>
          <ion-item *ngIf="_can">
+            <ion-label>Unsa nga lata?</ion-label>
+            <ion-select [(ngModel)]="can_brand_name">
+              <ion-option *ngFor="let can of can_details" value="{{ can.price }}"> {{can.brand_name}}</ion-option>
+            </ion-select>
+          </ion-item>
+         <ion-item *ngIf="_can">
            <ion-label stacked>Pila kabuok lata?</ion-label>
            <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="_numCans" value="{{ default_Day}}"></ion-input>
          </ion-item>

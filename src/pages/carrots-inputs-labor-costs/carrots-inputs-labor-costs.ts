@@ -5,6 +5,7 @@ import { DataProvider } from '../../providers/data/data';
 import { ArrayStorage } from '../../providers/data/data';
 
 import { ReviewInputsPage } from '../review-inputs/review-inputs';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 /**
  * Generated class for the CarrotsInputsLaborCostsPage page.
  *
@@ -31,6 +32,8 @@ export class CarrotsInputsLaborCostsPage {
   _adminCost=[]; // admin costs
   _temporaryValue=0;
   _temporaryVal=0;
+  can_details:any = [];
+  can_brand_name:any;
   toggleValue: boolean;
   // _canPrice:boolean;
   public _can:boolean = false;
@@ -44,11 +47,25 @@ export class CarrotsInputsLaborCostsPage {
   // ];
   // item : number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public _arrayStorage:ArrayStorage , public data: DataProvider , public modalCtrl: ModalController, private alertCtrl: AlertController, public cdRef:ChangeDetectorRef) {
+    public _arrayStorage:ArrayStorage , public data: DataProvider , public modalCtrl: ModalController, private alertCtrl: AlertController, public cdRef:ChangeDetectorRef, private sqlite: SQLite) {
       this.toggleValue = true;
   }
 
   ionViewDidLoad() {
+    this.sqlite.create({
+      name: 'ionicdb.db',
+      location: 'default'
+    }).then((db: SQLiteObject) =>{
+      db.executeSql('SELECT * FROM can_prices',{})
+      .then(res => {
+        if(res.rows.length > 0){
+          console.log("PRICE SA TAKIIS " +res.rows.item(0).price);
+            for(let rid=0; rid < res.rows.length; rid++){
+              this.can_details.push({id: res.rows.item(rid).rowid, brand_name: res.rows.item(0).brand_name ,  price: res.rows.item(0).price});
+            }
+        }
+      }).catch(e => console.log(e.message));
+    }).catch(e => console.log(e.message));
     console.log('ionViewDidLoad CarrotsInputsLaborCostsPage');
     let alert = this.alertCtrl.create({title: 'Notice', subTitle: 'The inputs that will be shown are the defaults. Please edit that suit for your reference',buttons: ['Dismiss']});
     this.vegetable = sessionStorage.getItem('vegetable');
@@ -71,8 +88,8 @@ export class CarrotsInputsLaborCostsPage {
     console.log("Calculating cost");
     for(let n = 0; n < this.inl; n++){
       if(!this.toggleValue && n==0){
-        console.log("solving per can value");
-        this.input_cost[n] = 1200 * parseInt(this._numCans); // 1200 represents Takii`s brand of carrot seedlings
+        console.log("solving per can value price "+this.can_brand_name);
+        this.input_cost[n] = this.can_brand_name * parseInt(this._numCans); // 1200 represents Takii`s brand of carrot seedlings
       }
       this._temporaryValue = this._temporaryValue + parseInt(this.input_cost[n]);
       console.log("Inputs cost Id no." + n + "total cost" + this._temporaryValue);
