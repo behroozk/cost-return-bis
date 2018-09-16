@@ -5,14 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import { MenudatabasePage } from '../pages/menudatabase/menudatabase';
 // import { HomePage } from '../pages/home/home';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-// import { ChooseVegetablePage } from '../pages/choose-vegetable/choose-vegetable';
+import { ChooseVegetablePage } from '../pages/choose-vegetable/choose-vegetable';
+import { CarrotsInputsLaborCostsPage } from '../pages/carrots-inputs-labor-costs/carrots-inputs-labor-costs';
 import { LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = LoginPage;
+  rootPage:any = CarrotsInputsLaborCostsPage;
   rowid:any;
   fName:any;
   lName:any;

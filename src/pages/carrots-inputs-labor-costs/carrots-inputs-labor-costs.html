@@ -4,18 +4,35 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>Vegetables Costs</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
-  <ion-content padding>
+  <ion-content>
     <div *ngIf="vegetable == 'carrots'; else cabbage">
-    <div id="input_cost">
+      <ion-card *ngIf="laborCostsInputs == false">
+        <ion-card-header>
+          Week Activity
+        </ion-card-header>
+        <form (ngSubmit)="checkActivity()">
+          <ion-list>
+            <ion-item *ngFor="let labor of carrotsLaborList">
+              <ion-label>{{ labor.labor }}</ion-label>
+              <ion-checkbox [(ngModel)]="list[labor.id]" [ngModelOptions]="{standalone: true}" color="dark"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+          <button ion-button type="submit" block>Add Todo</button>
+        </form>
+      </ion-card>
+
+
+
+    <!-- <div id="input_cost">
     <ion-label>Inputs Costs</ion-label>
       <ion-grid>
         <ion-row class="row_label">
@@ -37,9 +54,6 @@
            <ion-label stacked>Pila kabuok lata?</ion-label>
            <ion-input type="number" pattern="[0-9]*" required placeholder="Enter Cost" [(ngModel)]="_numCans" value="{{ default_Day}}"></ion-input>
          </ion-item>
-        <!-- <ng-template #_can> -->
-
-        <!-- </ng-template> -->
         </ion-row>
         <ion-row>
           <ion-item>
@@ -193,10 +207,10 @@
          <ion-input type="number" pattern="[0-9]*" placeholder="Enter Cost" [(ngModel)]="_laborCost[5]" value="{{ default_Pay}}"></ion-input>
        </ion-item>
      </ion-row>
-    </ion-grid>
+    </ion-grid> -->
     </div>
 
-    <div id="admin_cost" padding >
+    <!-- <div id="admin_cost" padding >
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -227,8 +241,8 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div>
       <ng-template #cabbage>
         <div id="input_cost" padding >
         <ion-label>Inputs Costs</ion-label>
@@ -464,5 +478,29 @@
             </ion-grid>
           </div>
       </ng-template>
-      <button ion-button block color="secondary" (click)="registerInputs()">Register Input</button>
+      <button ion-button block color="secondary" (click)="registerInputs()">Register Input</button> -->
+
+      <ion-slides pager *ngIf="laborCostsInputs">
+        <ion-slide *ngFor="let laborId of sortedLaborList">
+          <div *ngFor="let laborList of carrotsLaborList">
+            <div *ngIf="laborId.id == laborList.id">
+              <ion-list padding>
+                <p> {{ laborList.labor }}</p>
+                <ion-item>
+                  <ion-label stacked>Man Days</ion-label>
+                  <ion-input type="number" pattern="[0-9]*"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label stacked>Number of People</ion-label>
+                  <ion-input type="number" pattern="[0-9]*"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label stacked>Cost Per Head</ion-label>
+                  <ion-input type="number" pattern="[0-9]*"></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
   </ion-content>
