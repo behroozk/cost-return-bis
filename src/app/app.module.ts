@@ -7,6 +7,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 import { ArrayStorage } from '../providers/data/data';
 import { DataProvider } from '../providers/data/data';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -34,6 +35,9 @@ import { CostEditPageModule } from '../pages/cost-edit/cost-edit.module';
 import { CostEditViewPageModule } from '../pages/cost-edit-view/cost-edit-view.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { ClientInfoPageModule } from '../pages/client-info/client-info.module';
+import { InputCostCalculatorProvider } from '../providers/input-cost-calculator/input-cost-calculator';
+import { VegetableCostListsProvider } from '../providers/vegetable-cost-lists/vegetable-cost-lists';
+import { DatabaseServicesProvider } from '../providers/database-services/database-services';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,8 @@ import { ClientInfoPageModule } from '../pages/client-info/client-info.module';
     CostEditPageModule,
     CostEditViewPageModule,
     LoginPageModule,
-    ClientInfoPageModule
+    ClientInfoPageModule,
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -88,7 +93,10 @@ import { ClientInfoPageModule } from '../pages/client-info/client-info.module';
     ArrayStorage,
     DataProvider,
     SQLite,
-    Toast
+    Toast,
+    InputCostCalculatorProvider,
+    VegetableCostListsProvider,
+    DatabaseServicesProvider
   ]
 })
 export class AppModule {}

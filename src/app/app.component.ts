@@ -3,7 +3,7 @@ import { Platform, Events, AlertController, Nav, MenuController } from 'ionic-an
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { MenudatabasePage } from '../pages/menudatabase/menudatabase';
-// import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { ChooseVegetablePage } from '../pages/choose-vegetable/choose-vegetable';
 import { CarrotsInputsLaborCostsPage } from '../pages/carrots-inputs-labor-costs/carrots-inputs-labor-costs';
@@ -59,8 +59,8 @@ export class MyApp {
             }).catch(e => alert('para'+e.message));
           }
         }).catch(e => alert('3RD SQL:'+e.message));
-        db.executeSql('CREATE TABLE IF NOT EXISTS client_details(rowid INTEGER PRIMARY KEY, client_name TEXT, client_age TEXT, client_location TEXT, date_recorded TEXT)',{})
-        .then(res => console.log('Executed client details'));
+        // db.executeSql('CREATE TABLE IF NOT EXISTS client_details(rowid INTEGER PRIMARY KEY, client_name TEXT, client_age TEXT, client_location TEXT, date_recorded TEXT)',{})
+        // .then(res => console.log('Executed client details'));
         }).catch(e => console.log(e.message));
         db.executeSql('CREATE TABLE IF NOT EXISTS can_prices(rowid INTEGER PRIMARY KEY, vegetable TEXT, brand_name TEXT, price INTEGER)',{})
           .then(res =>{

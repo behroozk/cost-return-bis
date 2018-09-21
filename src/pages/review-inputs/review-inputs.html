@@ -16,8 +16,101 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
-  <div *ngIf="vegetable == 'carrots'; else cabbage">
+<ion-content text-center padding>
+  <h3>Initial Cost as of {{ dateToday }}</h3>
+  <ion-card *ngIf="!inputBool">
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>Inputs Cost</ion-col>
+            <ion-col col-6>{{ inputSubtotalCost }}</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="!laborBool">
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>Labor Cost</ion-col>
+            <ion-col col-6>{{ laborSubtotalCost }}</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="!adminBool">
+    <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>Administrative Cost</ion-col>
+            <ion-col col-6>{{ adminViewTotalCost }}</ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-md-6><button ion-button full (click)="showDetailedCosts()">Show detailed results</button></ion-col>
+        <ion-col col-md-6><button ion-button full (click)="showMenu()">Done</button></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-md-12><button ion-button full (click)="showBreakEven()">Show breakeven price</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="showOutput">
+    <p>Breakeven Price : {{ breakEven }}</p>
+    <p>Unit Variable Cost : {{ unitVarCost }}</p>
+    <p>Fixed Cost : {{ adminFixedSubtotalCost }}</p>
+    <p>Unit of Production : {{ unitProd }}</p>
+  </div>
+  <!-- <div>
+    <ion-card>
+      <ion-card-header>
+        Inputs
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let inputs of inputLists">
+            <ion-col col-6>{{ inputs.input }}</ion-col>
+            <ion-col col-6>This column will take 6 columns</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        Labor
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let labor of carrotsLaborList">
+            <ion-col col-6>{{ labor.labor }}</ion-col>
+            <ion-col col-6>This column will take 6 columns</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        Inputs
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let admin of adminCostLists">
+            <ion-col col-6>{{ admin.admin }}</ion-col>
+            <ion-col col-6>This column will take 6 columns</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div> -->
+  <!-- <div *ngIf="vegetable == 'carrots'; else cabbage">
   <ion-grid>
     <div id="seedlings">
     <ion-row>
@@ -467,5 +560,5 @@
   </div>
   </ion-grid>
 </ng-template>
-  <button block ion-button (click)="exitPage()">Save Data</button>
+  <button block ion-button (click)="exitPage()">Save Data</button> -->
 </ion-content>
