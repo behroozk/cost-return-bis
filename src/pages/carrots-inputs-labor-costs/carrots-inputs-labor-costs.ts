@@ -47,43 +47,55 @@ export class CarrotsInputsLaborCostsPage {
   // new declared values
   carrotsLaborList: any[];
   adminCostLists: any[];
-  inputLists:any[];
-  temporaryArray: any[] = [];
-  sortedLaborList: any[] = [];
 
-  inputs:string = 'Inputs';
-  labor:string = 'Labor';
-  administrative:string = 'Administrative';
+  inputLists:any[];
+  inputCost:any = [];
+  laborLists:any[];
+  laborCost:any = [];
+
+  temporaryArray: any[] = [];
+  sortedPaymentList: any[] = [];
 
   // public fixedCostIdentifier:any;
   public adminIdentifier:any;
   public laborIdentifier:any;
   public inputIdentifier:any;
 
+  public showPaymentOptions:boolean = true;
+  public showPaymentLists:any=[];
+
+  public showPayment:boolean = false;
+
   public mandays:any=[];
   public mancost:any=[];
   public manpower:any=[];
   public inputsCost:any=[]; // store input values
-  public adminCost:any=[];  // store admin input values
-  public inputObject:any=[]; // store input object
-  public adminObject:any=[]; // store admin object
+  public laborCost:any=[];
+  public foodcost:any=[];
+  // public adminCost:any=[];  // store admin input values
+  // public inputObject:any=[]; // store input object
+  // public adminObject:any=[]; // store admin object
 
   public iconDown:boolean = false;
-  public inputCostActivity:boolean = true;
-  public adminCostActivity:boolean = true;
-  public laborCostActivity:boolean = true;
+  // public inputCostActivity:boolean = true;
+  // public adminCostActivity:boolean = true;
+  // public laborCostActivity:boolean = true;
   public buttonChoicesMenu:boolean = true;
 
-  public inputCostInputs:boolean = false;  // show inputs of input
-  public adminCostInputs:boolean = false; // show inputs of admin
-  public laborCostsInputs:boolean = false; // show inputs of labor inputs
-  public laborCostsOption:boolean = true;
-  public inputCostsOption:boolean = true;
-  public adminCostsOption:boolean = true;
+  public costInputs:boolean = false;  // show inputs of input , labor , food
+  // public adminCostInputs:boolean = false; // show inputs of admin
+  // public laborCostsInputs:boolean = false; // show inputs of labor inputs
+  // public laborCostsOption:boolean = true;
+  // public inputCostsOption:boolean = true;
+  // public adminCostsOption:boolean = true;
+
+  maxLength:any;
+  laborClicked:any;
 
   laborLength:any;
-  laborCostId:any;
+  laborCost:any;
   list:any=[];
+  public pay:any=[];
   prelim_data:any=[];
   //
   constructor(public navCtrl: NavController,
@@ -97,78 +109,82 @@ export class CarrotsInputsLaborCostsPage {
   }
   getCarrotsCostList() {
     this.carrotsLaborList = this.carrotProvider.carrotsLaborListProvider();
-    // [
-    //   { id: 0, labor: 'Clearing' },
-    //   { id: 1, labor: 'Plowing' },
-    //   { id: 2, labor: 'Harrowing' },
-    //   { id: 3, labor: 'Pulverizing' },
-    //   { id: 4, labor: 'Plotting' },
-    //   { id: 5, labor: 'Sowing' },
-    //   { id: 6, labor: 'Weeding + Thinning' },
-    //   { id: 7, labor: 'Spraying' },
-    //   { id: 8, labor: 'Fertilization' },
-    //   { id: 9, labor: 'Weeding' },
-    //   { id: 10, labor: 'Harvesting' },
-    //   { id: 11, labor: 'Hauling' }
-    // ];
+    this.showPaymentLists = this.carrotProvider.paymentActivityListProvider();
     this.inputLists = this.carrotProvider.carrotsInputListProvider();
-    // [
-    //   { id: 0, input: 'Seeds' },
-    //   { id: 1, input: 'Fertilizer' },
-    //   { id: 2, input: 'Chemicals (Insecticide,Pesticide,Fungicide)'}
-    // ];
+    this.laborLists = this.carrotProvider.laborActivityListProvider();
     this.adminCostLists = this.carrotProvider.carrotsAdminListProvider();
-    // [
-    //   { id: 0, admin: 'Land Rental'},
-    //   { id: 1, admin: 'Bodega'},
-    //   { id: 2, admin: 'Tractor'},
-    //   { id: 3, admin: 'Animals'},
-    //   { id: 4, admin: 'Transportation'},
-    //   { id: 5, admin: 'Packing Materials'},
-    //   { id: 6, admin: 'Overhead and Contigency'}
-    // ];
   }
-  buttonChoice(buttonChoice){
-    console.log(buttonChoice);
-    if(buttonChoice === 'Inputs' && this.inputCostsOption){
-      this.inputCostsOption = false;
-      this.laborCostActivity = false;
-      this.adminCostActivity = false;
-      this.iconDown = true;
+  // buttonChoice(buttonChoice){
+  //   console.log(buttonChoice);
+  //   if(buttonChoice === 'Inputs' && this.inputCostsOption){
+  //     this.inputCostsOption = false;
+  //     this.laborCostActivity = false;
+  //     this.adminCostActivity = false;
+  //     this.iconDown = true;
+  //   }
+  //   else if(buttonChoice === 'Labor' && this.laborCostsOption){
+  //     this.laborCostsOption = false;
+  //     this.inputCostActivity = false;
+  //     this.adminCostActivity = false;
+  //     this.iconDown = true;
+  //   }
+  //   else if(buttonChoice === 'Administrative' && this.adminCostsOption){
+  //     this.adminCostsOption = false;
+  //     this.inputCostActivity = false;
+  //     this.laborCostActivity = false;
+  //     this.iconDown = true;
+  //   }
+  //   else if(buttonChoice === 'Inputs' && !this.inputCostsOption){
+  //     this.inputCostsOption = true;
+  //     this.laborCostActivity = true;
+  //     this.adminCostActivity = true;
+  //     this.iconDown = false;
+  //   }
+  //   else if(buttonChoice === 'Labor' && !this.laborCostsOption){
+  //     this.laborCostsOption = true;
+  //     this.inputCostActivity = true;
+  //     this.adminCostActivity = true;
+  //     this.iconDown = false;
+  //   }
+  //   else if(buttonChoice === 'Administrative' && !this.adminCostsOption){
+  //     this.adminCostsOption = true;
+  //     this.inputCostActivity = true;
+  //     this.laborCostActivity = true;
+  //     this.iconDown = false;
+  //   }
+  // }
+  datachanged(e:any,laborId:any,labor:any){
+    console.log(e);
+    console.log(e.checked+", "+laborId+" ,"+labor);
+    this.laborClicked = labor;
+    this.showPaymentOptions = false;
+    this.showPayment = true;
     }
-    else if(buttonChoice === 'Labor' && this.laborCostsOption){
-      this.laborCostsOption = false;
-      this.inputCostActivity = false;
-      this.adminCostActivity = false;
-      this.iconDown = true;
+    checkActivity(){
+      this.costInputs = true;
+      this.showPayment = false;
+      this.buttonChoicesMenu = false;
+      console.log("payments : "+this.pay);
+      let viewCheckBoxes = this.pay.includes(true);
+      console.log(viewCheckBoxes);
+      if(this.payment != ''){
+        if(viewCheckBoxes){
+          this.sortedPaymentList = [];
+            for (var i = 0; i < this.pay.length; i++) {
+              if(this.pay[i]){
+                console.log("true : "+i);
+                this.sortedPaymentList.push({ id: i});
+              }
+            }
+        }
+      }
     }
-    else if(buttonChoice === 'Administrative' && this.adminCostsOption){
-      this.adminCostsOption = false;
-      this.inputCostActivity = false;
-      this.laborCostActivity = false;
-      this.iconDown = true;
+
+    submitInputs(){
+      
     }
-    else if(buttonChoice === 'Inputs' && !this.inputCostsOption){
-      this.inputCostsOption = true;
-      this.laborCostActivity = true;
-      this.adminCostActivity = true;
-      this.iconDown = false;
-    }
-    else if(buttonChoice === 'Labor' && !this.laborCostsOption){
-      this.laborCostsOption = true;
-      this.inputCostActivity = true;
-      this.adminCostActivity = true;
-      this.iconDown = false;
-    }
-    else if(buttonChoice === 'Administrative' && !this.adminCostsOption){
-      this.adminCostsOption = true;
-      this.inputCostActivity = true;
-      this.laborCostActivity = true;
-      this.iconDown = false;
-    }
-  }
   ionViewDidLoad() {
-    console.log("true ni?"+this.inputCostActivity);
+    // console.log("true ni?"+this.inputCostActivity);
     this.sqlite.create({
       name: 'ionicdb.db',
       location: 'default'
@@ -188,102 +204,102 @@ export class CarrotsInputsLaborCostsPage {
     console.log("gulay :" +this.vegetable);
     this.getCarrotsCostList();
   }
-
-  checkActivity(activityType:number) {
-    this.buttonChoicesMenu = false;
-    var i;
-    let viewCheckBoxes = this.list.includes(true);
-    let alert = this.alertCtrl.create({title: 'Notice', subTitle: 'Please select activity',buttons: ['Dismiss']});
-    if(this.list != ''){
-      if(viewCheckBoxes){
-        this.sortedLaborList = [];
-        for (i = 0; i < this.list.length; i++) {
-          if(this.list[i]){
-            console.log("true : "+i);
-            this.sortedLaborList.push({ id: i});
-          }
-        }
-        if(activityType == 0){
-          this.inputCostInputs = true;
-          this.inputIdentifier = this.sortedLaborList;
-        }
-        else if(activityType == 1){
-          this.laborCostsInputs = true;
-          this.laborIdentifier = this.sortedLaborList;
-        }else if(activityType == 2){
-          this.adminCostInputs = true;
-          this.adminIdentifier = this.sortedLaborList;
-        }
-        this.laborLength = this.sortedLaborList.length;
-        let alert = this.alertCtrl.create({title: 'Notice', subTitle: 'The inputs that will be shown are the defaults. Please edit that suit for your reference',buttons: ['Dismiss']});
-        alert.present(); }
-      else{ alert.present(); }
-    }
-    else{ alert.present(); }
-  }
-  submitLaborInputs(number:number){
-    for(let key1 of this.laborIdentifier){
-      let labor_name = this.carrotsLaborList.find(i => i.id == key1.id);
-          // console.log("labor name : "+labor_name.labor);
-          // console.log("cost per labor: "+this.calculator.costPerLabor(this.mancost[key1],this.manpower[key1],this.mandays[key1]));
-          this.prelim_data.push({ id:labor_name.id, manpower: this.manpower[key1.id], mancost: this.mancost[key1.id], mandays: this.mandays[key1.id], laborname: labor_name.labor });
-    }
-    if(number == 0){
-      this.spawnModalPage();
-    }
-    else{
-      this.buttonChoicesMenu = true;
-      this.laborCostsInputs = false;
-      this.laborCostActivity = false;
-      this.inputCostActivity = true;
-      this.adminCostActivity = true;
-    }
-    this.list =[];
-    console.log(JSON.stringify(this.prelim_data));
-    console.log("yeah :"+this.buttonChoicesMenu);
-  }
-
-  submitInputs(numberSign:number){
-    for(let findIdkey of this.inputIdentifier){
-      let input_name = this.inputLists.find(i => i.id == findIdkey.id);
-      this.inputObject.push({ id:input_name.id, inputName:input_name.input, cost:this.inputsCost[findIdkey.id]});
-      }
-    if(numberSign == 0){
-      this.spawnModalPage();
-    }
-    else{
-        this.buttonChoicesMenu = true;
-        this.inputCostInputs = false;
-        this.inputCostActivity = false;
-        this.laborCostActivity = true;
-        this.adminCostActivity = true;
-    }
-    console.log(JSON.stringify(this.inputObject));
-    console.log("yeah :"+this.buttonChoicesMenu);
-    this.list =[];
-  }
-  submitAdminInputs(signedNumber:number){
-    for(let findId of this.adminIdentifier){
-    // for(var ikey=0; ikey<this.sortedLaborList.length; ikey++){
-      console.log(findId.id);
-      let admin_name = this.adminCostLists.find(i => i.id == findId.id);
-      console.log("admin name : "+admin_name.admin+" admin id : "+admin_name.id);
-      this.adminObject.push({ id:admin_name.id, inputName:admin_name.admin, cost:this.adminCost[findId.id]});
-      }
-    if(signedNumber == 0){
-      this.spawnModalPage();
-    }
-    else{
-        this.buttonChoicesMenu = true;
-        this.adminCostInputs = false;
-        this.adminCostActivity = false;
-        this.inputCostActivity = true;
-        this.laborCostActivity = true;
-      }
-    console.log(JSON.stringify(this.adminObject));
-    console.log("yeah :"+this.buttonChoicesMenu);
-    this.list =[];
-  }
+  //
+  // checkActivity(activityType:number) {
+  //   this.buttonChoicesMenu = false;
+  //   var i;
+  //   let viewCheckBoxes = this.list.includes(true);
+  //   let alert = this.alertCtrl.create({title: 'Notice', subTitle: 'Please select activity',buttons: ['Dismiss']});
+  //   if(this.list != ''){
+  //     if(viewCheckBoxes){
+  //       this.sortedLaborList = [];
+  //       for (i = 0; i < this.list.length; i++) {
+  //         if(this.list[i]){
+  //           console.log("true : "+i);
+  //           this.sortedLaborList.push({ id: i});
+  //         }
+  //       }
+  //       if(activityType == 0){
+  //         this.inputCostInputs = true;
+  //         this.inputIdentifier = this.sortedLaborList;
+  //       }
+  //       else if(activityType == 1){
+  //         this.laborCostsInputs = true;
+  //         this.laborIdentifier = this.sortedLaborList;
+  //       }else if(activityType == 2){
+  //         this.adminCostInputs = true;
+  //         this.adminIdentifier = this.sortedLaborList;
+  //       }
+  //       this.laborLength = this.sortedLaborList.length;
+  //       let alert = this.alertCtrl.create({title: 'Notice', subTitle: 'The inputs that will be shown are the defaults. Please edit that suit for your reference',buttons: ['Dismiss']});
+  //       alert.present(); }
+  //     else{ alert.present(); }
+  //   }
+  //   else{ alert.present(); }
+  // }
+  // submitLaborInputs(number:number){
+  //   for(let key1 of this.laborIdentifier){
+  //     let labor_name = this.carrotsLaborList.find(i => i.id == key1.id);
+  //         // console.log("labor name : "+labor_name.labor);
+  //         // console.log("cost per labor: "+this.calculator.costPerLabor(this.mancost[key1],this.manpower[key1],this.mandays[key1]));
+  //         this.prelim_data.push({ id:labor_name.id, manpower: this.manpower[key1.id], mancost: this.mancost[key1.id], mandays: this.mandays[key1.id], laborname: labor_name.labor });
+  //   }
+  //   if(number == 0){
+  //     this.spawnModalPage();
+  //   }
+  //   else{
+  //     this.buttonChoicesMenu = true;
+  //     this.laborCostsInputs = false;
+  //     this.laborCostActivity = false;
+  //     this.inputCostActivity = true;
+  //     this.adminCostActivity = true;
+  //   }
+  //   this.list =[];
+  //   console.log(JSON.stringify(this.prelim_data));
+  //   console.log("yeah :"+this.buttonChoicesMenu);
+  // }
+  //
+  // submitInputs(numberSign:number){
+  //   for(let findIdkey of this.inputIdentifier){
+  //     let input_name = this.inputLists.find(i => i.id == findIdkey.id);
+  //     this.inputObject.push({ id:input_name.id, inputName:input_name.input, cost:this.inputsCost[findIdkey.id]});
+  //     }
+  //   if(numberSign == 0){
+  //     this.spawnModalPage();
+  //   }
+  //   else{
+  //       this.buttonChoicesMenu = true;
+  //       this.inputCostInputs = false;
+  //       this.inputCostActivity = false;
+  //       this.laborCostActivity = true;
+  //       this.adminCostActivity = true;
+  //   }
+  //   console.log(JSON.stringify(this.inputObject));
+  //   console.log("yeah :"+this.buttonChoicesMenu);
+  //   this.list =[];
+  // }
+  // submitAdminInputs(signedNumber:number){
+  //   for(let findId of this.adminIdentifier){
+  //   // for(var ikey=0; ikey<this.sortedLaborList.length; ikey++){
+  //     console.log(findId.id);
+  //     let admin_name = this.adminCostLists.find(i => i.id == findId.id);
+  //     console.log("admin name : "+admin_name.admin+" admin id : "+admin_name.id);
+  //     this.adminObject.push({ id:admin_name.id, inputName:admin_name.admin, cost:this.adminCost[findId.id]});
+  //     }
+  //   if(signedNumber == 0){
+  //     this.spawnModalPage();
+  //   }
+  //   else{
+  //       this.buttonChoicesMenu = true;
+  //       this.adminCostInputs = false;
+  //       this.adminCostActivity = false;
+  //       this.inputCostActivity = true;
+  //       this.laborCostActivity = true;
+  //     }
+  //   console.log(JSON.stringify(this.adminObject));
+  //   console.log("yeah :"+this.buttonChoicesMenu);
+  //   this.list =[];
+  // }
   spawnModalPage(){
     this.navCtrl.push(ReviewInputsPage, { labor:this.prelim_data, admin: this.adminObject, input: this.inputObject});
     // let profileModal = this.modalCtrl.create(ReviewInputsPage, { labor: this.prelim_data, admin: this.adminObject, input: this.inputObject});

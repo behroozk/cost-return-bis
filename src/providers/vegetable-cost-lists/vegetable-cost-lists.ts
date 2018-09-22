@@ -13,6 +13,8 @@ export class VegetableCostListsProvider {
   carrotsLaborList:any = [];
   inputLists:any = [];
   adminCostLists:any = [];
+  paymentActivityList:any = [];
+  laborList:any = [];
 
   constructor() {
 
@@ -38,6 +40,20 @@ export class VegetableCostListsProvider {
       { id: 0, input: 'Seeds' },
       { id: 1, input: 'Fertilizer' },
       { id: 2, input: 'Chemicals (Insecticide,Pesticide,Fungicide)'}
+    ];
+  }
+  paymentActivityListProvider(){
+    return this.paymentActivityList = [
+      { id: 0, payment: 'Inputs' },
+      { id: 1, payment: 'Labor' },
+      { id: 2, payment: 'Food' }
+    ];
+  }
+  laborActivityListProvider(){
+    return this.laborList = [
+    { id: 0, laborActivity: 'Mandays'},
+    { id: 1, laborActivity: 'Manpower'},
+    { id: 2, laborActivity: 'Mancost'}
     ];
   }
   carrotsAdminListProvider(){

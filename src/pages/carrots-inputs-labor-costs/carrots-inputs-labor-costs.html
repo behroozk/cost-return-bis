@@ -16,11 +16,14 @@
   <ion-content>
     <!-- <div *ngIf="vegetable == 'carrots'; else cabbage"> -->
       <ion-card *ngIf="buttonChoicesMenu">
-        <ion-card-header>
+        <ion-card-header *ngIf="showPaymentOptions">
           Activities of the week
         </ion-card-header>
+        <ion-card-header *ngIf="showPayment">
+          Payments for {{ laborClicked }}
+        </ion-card-header>
         <ion-list>
-          <ion-item *ngIf="inputCostActivity">
+          <!-- <ion-item *ngIf="inputCostActivity">
             <button ion-item (click)="buttonChoice(inputs)">
               <ion-icon name="information-circle" item-start></ion-icon>
                 Inputs
@@ -36,25 +39,30 @@
               </ion-list>
               <button ion-button type="submit" block>Add Todo</button>
             </form>
-          </ion-item>
-          <ion-item *ngIf="laborCostActivity">
-            <button ion-item (click)="buttonChoice(labor)">
+          </ion-item> -->
+          <!-- <ion-item *ngIf="laborCostActivity"> -->
+            <!-- <button ion-item (click)="buttonChoice(labor)">
               <ion-icon name="information-circle" item-start></ion-icon>
                 Labor
               <ion-icon *ngIf="!iconDown" name="arrow-forward" item-end></ion-icon>
               <ion-icon *ngIf="iconDown" name="arrow-dropdown-circle" item-end></ion-icon>
-            </button>
-            <form (ngSubmit)="checkActivity(1)" *ngIf="!laborCostsOption">
-              <ion-list>
-                <ion-item *ngFor="let labor of carrotsLaborList">
-                  <ion-label>{{ labor.labor }}</ion-label>
-                  <ion-checkbox [(ngModel)]="list[labor.id]" [ngModelOptions]="{standalone: true}" color="dark"></ion-checkbox>
-                </ion-item>
-              </ion-list>
-              <button ion-button type="submit" block>Add Todo</button>
-            </form>
-          </ion-item>
-          <ion-item *ngIf="adminCostActivity">
+            </button>*ngIf="!laborCostsOption" -->
+                <ion-list *ngIf="showPaymentOptions">
+                  <ion-item *ngFor="let labor of carrotsLaborList">
+                    <ion-label>{{ labor.labor }}</ion-label>
+                    <ion-checkbox [(ngModel)]="list[labor.id]" [ngModelOptions]="{standalone: true}" (ionChange)="datachanged($event,labor.id,labor.labor)" color="dark"></ion-checkbox>
+                  </ion-item>
+                </ion-list>
+
+                <form (ngSubmit)="checkActivity()" *ngIf="showPayment">
+                  <ion-item *ngFor="let payment of showPaymentLists">
+                    <ion-label>{{ payment.payment }}</ion-label>
+                    <ion-checkbox [(ngModel)]="pay[payment.id]" [ngModelOptions]="{standalone: true}" color="dark"></ion-checkbox>
+                  </ion-item>
+                  <button ion-button type="submit" block>Submit</button>
+                </form>
+          <!-- </ion-item> -->
+          <!-- <ion-item *ngIf="adminCostActivity">
             <button ion-item (click)="buttonChoice(administrative)">
               <ion-icon name="information-circle" item-start></ion-icon>
                 Administrative
@@ -70,31 +78,37 @@
               </ion-list>
               <button ion-button type="submit" block>Add Todo</button>
             </form>
-          </ion-item>
+          </ion-item> -->
           </ion-list>
-          <ion-item>
-            <ion-label>Clearing</ion-label>
-            <ion-checkbox [(ngModel)]="clearing" color="dark"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-list *ngIf="clearing">
-              <ion-item>
-                <ion-label>Labor</ion-label>
-                <ion-checkbox [(ngModel)]="clearing_labor" color="dark"></ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-label>Inputs</ion-label>
-                <ion-checkbox [(ngModel)]="clearing_inputs" color="dark"></ion-checkbox>
-              </ion-item>
-              <ion-item>
-                <ion-label>Food</ion-label>
-                <ion-checkbox [(ngModel)]="clearing_food" color="dark"></ion-checkbox>
-              </ion-item>
-            </ion-list>
-          </ion-item>
       </ion-card>
+      <ion-slides pager *ngIf="costInputs">
+        <ion-slide *ngFor="let payment of sortedPaymentList; let i=index">
+          <h1>{{ laborClicked }}</h1>
+          <div *ngIf="payment.id == 0">
+            <ion-item *ngFor="let inputs of inputLists">
+                <ion-label stacked>{{ inputs.input}} Cost</ion-label>
+                <ion-input [(ngModel)]="inputsCost[inputs.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+            </ion-item>
+          </div>
+          <div *ngIf="payment.id == 1">
+            <ion-item *ngFor="let labor of laborLists">
+              <ion-label stacked>{{ labor.laborActivity}} Cost</ion-label>
+              <ion-input [(ngModel)]="laborCost[labor.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+            </ion-item>
+          </div>
+          <div *ngIf="payment.id == 2">
+            <ion-item>
+              <ion-label stacked>Food Cost</ion-label>
+              <ion-input [(ngModel)]="foodcost" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+            </ion-item>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <button ion-button color="secondary" (click)="submitInputs()">Submit</button>
+        </ion-slide>
+      </ion-slides>
     <!-- </div> -->
-    <ion-slides *ngIf="clearing">
+    <!-- <ion-slides *ngIf="clearing">
       <ion-slide *ngIf="clearing_labor">
         <ion-label>Labor cost for Clearing</ion-label>
         <ion-item>
@@ -186,7 +200,7 @@
         <button ion-button color="secondary" (click)="submitAdminInputs(1)">Add another activity</button>
         <button ion-button color="secondary" (click)="submitAdminInputs(0)">Submit Input</button>
       </ion-slide>
-     </ion-slides>
+     </ion-slides> -->
 
      <!-- <form (ngSubmit)="checkLaborActivity()">
        <ion-list>
