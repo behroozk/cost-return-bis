@@ -7,6 +7,9 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 import { ArrayStorage } from '../providers/data/data';
 import { DataProvider } from '../providers/data/data';
+import { InputCostCalculatorProvider } from '../providers/input-cost-calculator/input-cost-calculator';
+import { VegetableCostListsProvider } from '../providers/vegetable-cost-lists/vegetable-cost-lists';
+import { DatabaseServicesProvider } from '../providers/database-services/database-services';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
@@ -22,6 +25,7 @@ import { CostEditPage } from '../pages/cost-edit/cost-edit';
 import { CostEditViewPage } from '../pages/cost-edit-view/cost-edit-view';
 import { LoginPage } from '../pages/login/login';
 import { ClientInfoPage } from '../pages/client-info/client-info';
+import { PaymentsPage } from '../pages/payments/payments';
 
 //Modules
 import { ChooseVegetablePageModule } from '../pages/choose-vegetable/choose-vegetable.module';
@@ -35,9 +39,7 @@ import { CostEditPageModule } from '../pages/cost-edit/cost-edit.module';
 import { CostEditViewPageModule } from '../pages/cost-edit-view/cost-edit-view.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { ClientInfoPageModule } from '../pages/client-info/client-info.module';
-import { InputCostCalculatorProvider } from '../providers/input-cost-calculator/input-cost-calculator';
-import { VegetableCostListsProvider } from '../providers/vegetable-cost-lists/vegetable-cost-lists';
-import { DatabaseServicesProvider } from '../providers/database-services/database-services';
+import { PaymentsPageModule } from '../pages/payments/payments.module';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { DatabaseServicesProvider } from '../providers/database-services/databas
     CostEditViewPageModule,
     LoginPageModule,
     ClientInfoPageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaymentsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -84,7 +87,8 @@ import { DatabaseServicesProvider } from '../providers/database-services/databas
     CostEditPage,
     CostEditViewPage,
     LoginPage,
-    ClientInfoPage
+    ClientInfoPage,
+    PaymentsPage
   ],
   providers: [
     StatusBar,

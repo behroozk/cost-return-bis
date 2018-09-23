@@ -50,17 +50,18 @@
                 <ion-list *ngIf="showPaymentOptions">
                   <ion-item *ngFor="let labor of carrotsLaborList">
                     <ion-label>{{ labor.labor }}</ion-label>
-                    <ion-checkbox [(ngModel)]="list[labor.id]" [ngModelOptions]="{standalone: true}" (ionChange)="datachanged($event,labor.id,labor.labor)" color="dark"></ion-checkbox>
+                    <ion-checkbox *ngIf="!list[labor.id]" [(ngModel)]="list[labor.id]" [ngModelOptions]="{standalone: true}" (ionChange)="datachanged($event,labor.id,labor.labor)" color="dark" disabled="false"></ion-checkbox>
+                    <ion-checkbox *ngIf="list[labor.id]" [(ngModel)]="list[labor.id]" disabled="true"></ion-checkbox>
                   </ion-item>
                 </ion-list>
 
-                <form (ngSubmit)="checkActivity()" *ngIf="showPayment">
+                <!-- <form (ngSubmit)="checkActivity()" *ngIf="showPayment">
                   <ion-item *ngFor="let payment of showPaymentLists">
                     <ion-label>{{ payment.payment }}</ion-label>
                     <ion-checkbox [(ngModel)]="pay[payment.id]" [ngModelOptions]="{standalone: true}" color="dark"></ion-checkbox>
                   </ion-item>
                   <button ion-button type="submit" block>Submit</button>
-                </form>
+                </form> -->
           <!-- </ion-item> -->
           <!-- <ion-item *ngIf="adminCostActivity">
             <button ion-item (click)="buttonChoice(administrative)">
@@ -81,7 +82,7 @@
           </ion-item> -->
           </ion-list>
       </ion-card>
-      <ion-slides pager *ngIf="costInputs">
+      <!-- <ion-slides pager *ngIf="costInputs">
         <ion-slide *ngFor="let payment of sortedPaymentList; let i=index">
           <h1>{{ laborClicked }}</h1>
           <div *ngIf="payment.id == 0">
@@ -106,7 +107,7 @@
         <ion-slide>
           <button ion-button color="secondary" (click)="submitInputs()">Submit</button>
         </ion-slide>
-      </ion-slides>
+      </ion-slides> -->
     <!-- </div> -->
     <!-- <ion-slides *ngIf="clearing">
       <ion-slide *ngIf="clearing_labor">

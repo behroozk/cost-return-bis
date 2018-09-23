@@ -1,0 +1,64 @@
+<!--
+  Generated template for the PaymentsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ laborName }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="checkPayableActivity()" *ngIf="paymentChoices">
+    <ion-item *ngFor="let payment of showPaymentLists">
+      <ion-label>{{ payment.payment }}</ion-label>
+      <ion-checkbox [(ngModel)]="pay[payment.id]" [ngModelOptions]="{standalone: true}" color="dark"></ion-checkbox>
+    </ion-item>
+    <button ion-button type="submit" block>Submit</button>
+  </form>
+
+  <form (ngSubmit)="inputsChoices()" *ngIf="showInputs">
+    <h1>Select inputs</h1>
+    <ion-item *ngFor="let inputs of inputLists">
+      <ion-label>{{ inputs.input}} Cost</ion-label>
+      <ion-checkbox [(ngModel)]="inputChoices[inputs.id]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+    </ion-item>
+    <button ion-button type="submit" block>Submit</button>
+  </form>
+
+  <ion-slides pager *ngIf="costInputs">
+    <ion-slide *ngFor="let payment of sortedPaymentList; let i=index">
+      <h1>{{ laborClicked }}</h1>
+      <div *ngIf="payment.id == 0">
+        <div *ngFor="let sortInputs of sortedInputs">
+          <div *ngFor="let inputs of inputLists">
+            <ion-item *ngIf="sortInputs.id == inputs.id">
+                <ion-label stacked>{{ inputs.input}} Cost</ion-label>
+                <ion-input [(ngModel)]="inputsCost[inputs.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="payment.id == 1">
+        <ion-item *ngFor="let labor of laborLists">
+          <ion-label stacked>{{ labor.laborActivity}} Cost</ion-label>
+          <ion-input [(ngModel)]="laborCost[labor.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="payment.id == 2">
+        <ion-item>
+          <ion-label stacked>Food Cost</ion-label>
+          <ion-input [(ngModel)]="foodcost" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+        </ion-item>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <button ion-button color="secondary" (click)="submitInputsPayableActivity()">Submit</button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

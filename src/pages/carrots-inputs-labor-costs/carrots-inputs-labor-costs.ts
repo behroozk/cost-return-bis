@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef  } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController  } from 'ionic-angular';
 
+import { PaymentsPage } from '../payments/payments';
 // import { DataProvider } from '../../providers/data/data';
 // import { ArrayStorage } from '../../providers/data/data';
 import { VegetableCostListsProvider } from '../../providers/vegetable-cost-lists/vegetable-cost-lists';
 
-import { ReviewInputsPage } from '../review-inputs/review-inputs';
+// import { ReviewInputsPage } from '../review-inputs/review-inputs';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 /**
  * Generated class for the CarrotsInputsLaborCostsPage page.
@@ -51,7 +52,6 @@ export class CarrotsInputsLaborCostsPage {
   inputLists:any[];
   inputCost:any = [];
   laborLists:any[];
-  laborCost:any = [];
 
   temporaryArray: any[] = [];
   sortedPaymentList: any[] = [];
@@ -90,10 +90,9 @@ export class CarrotsInputsLaborCostsPage {
   // public adminCostsOption:boolean = true;
 
   maxLength:any;
-  laborClicked:any;
+  // laborClicked:any;
 
   laborLength:any;
-  laborCost:any;
   list:any=[];
   public pay:any=[];
   prelim_data:any=[];
@@ -109,10 +108,10 @@ export class CarrotsInputsLaborCostsPage {
   }
   getCarrotsCostList() {
     this.carrotsLaborList = this.carrotProvider.carrotsLaborListProvider();
-    this.showPaymentLists = this.carrotProvider.paymentActivityListProvider();
-    this.inputLists = this.carrotProvider.carrotsInputListProvider();
-    this.laborLists = this.carrotProvider.laborActivityListProvider();
-    this.adminCostLists = this.carrotProvider.carrotsAdminListProvider();
+    // this.showPaymentLists = this.carrotProvider.paymentActivityListProvider();
+    // this.inputLists = this.carrotProvider.carrotsInputListProvider();
+    // this.laborLists = this.carrotProvider.laborActivityListProvider();
+    // this.adminCostLists = this.carrotProvider.carrotsAdminListProvider();
   }
   // buttonChoice(buttonChoice){
   //   console.log(buttonChoice);
@@ -154,11 +153,31 @@ export class CarrotsInputsLaborCostsPage {
   //   }
   // }
   datachanged(e:any,laborId:any,labor:any){
-    console.log(e);
-    console.log(e.checked+", "+laborId+" ,"+labor);
-    this.laborClicked = labor;
-    this.showPaymentOptions = false;
-    this.showPayment = true;
+    let showPayment = this.modalCtrl.create(PaymentsPage, { laborId: laborId, laborTitle: labor });
+    let alert = this.alertCtrl.create({
+    title: 'Confirm activity',
+    message: 'Did you do '+labor+'?',
+    buttons: [
+      {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          this.list[laborId] = false;
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          showPayment.present();
+        }
+      }
+    ]
+    });
+    alert.present();
+    // this.showPaymentOptions = false;
+    // this.showPayment = true;
+
+
     }
     checkActivity(){
       this.costInputs = true;
@@ -178,10 +197,6 @@ export class CarrotsInputsLaborCostsPage {
             }
         }
       }
-    }
-
-    submitInputs(){
-      
     }
   ionViewDidLoad() {
     // console.log("true ni?"+this.inputCostActivity);

@@ -83,13 +83,13 @@ export class ReviewInputsPage {
     public viewCtrl: ViewController) {
       this.cropId = sessionStorage.getItem('croppingId');
       this.userId = sessionStorage.getItem('userid');
-      this.input = this.navParams.get('input');
-      this.labor = this.navParams.get('labor');
-      this.admin = this.navParams.get('admin');
-      this.inputBool = this.calculator.isEmpty(this.input); // check if array is empty
-      this.laborBool = this.calculator.isEmpty(this.labor);
-      this.adminBool = this.calculator.isEmpty(this.admin);
-      this.maxLength = Math.max(this.input.length,this.labor.length,this.admin.length);
+      // this.input = this.navParams.get('input');
+      // this.labor = this.navParams.get('labor');
+      // this.admin = this.navParams.get('admin');
+      // this.inputBool = this.calculator.isEmpty(this.input); // check if array is empty
+      // this.laborBool = this.calculator.isEmpty(this.labor);
+      // this.adminBool = this.calculator.isEmpty(this.admin);
+      // this.maxLength = Math.max(this.input.length,this.labor.length,this.admin.length);
       // console.log(this.input+" ---- "+this.labor+"laborBool "+this.laborBool);
       // console.log(this.input.length+" ------ "+this.labor.length+" ------ "+this.admin.length);
       // console.log(this.maxLength);
@@ -98,7 +98,7 @@ export class ReviewInputsPage {
     var date = new Date();
     var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     this.dateToday = monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
-    this.dbServiceProvier.insertClientDataHolder(this.userId,this.cropId,this.dateToday);
+    // this.dbServiceProvier.insertClientDataHolder(this.userId,this.cropId,this.dateToday);
     // console.log("RETURN ID : "+this.clientCreatorDataHolder);
     let loading = this.loadingCtrl.create({
           content: `
@@ -109,10 +109,10 @@ export class ReviewInputsPage {
       </div>`,
         });
     setTimeout(() => {
-        this.calculateValues();
+        // this.calculateValues();
         loading.dismiss();
       }, 5000);
-    this.getCarrotsCostList();
+    // this.getCarrotsCostList();
     loading.present();
   }
   getCarrotsCostList() {

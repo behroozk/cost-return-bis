@@ -98,23 +98,27 @@ export class HomePage {
   userClicked(client_id){
     this.userList = false;
     this.enteredClient = client_id;
-    this.showCroppingList();
+    this.showCroppingList(client_id);
   }
 
-  showCroppingList(){
+  showCroppingList(client_id){
+    console.log("@homets.SHOWCROPPINGLIST --> client id : "+client_id);
     this.croppingInfo = [];
     this.sqlite.create({
         name: 'ionicdb.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         // db.executeSql('SELECT * FROM client_details INNER JOIN cropping ON client_details.rowid = cropping.client_user_id INNER JOIN week ON cropping.croppping_id = week.cropping_id', {})
-          db.executeSql('SELECT * FROM cropping INNER JOIN client_details ON cropping.client_user_id = client_details.rowid', {})
+          db.executeSql('SELECT * FROM cropping INNER JOIN client_details ON cropping.client_user_id = client_details.rowid WHERE client_details.rowid = "'+client_id+'"', {})
         .then(res => {
           if(res.rows.length > 0){
             for(let rid=0; rid < res.rows.length; rid++){
-              console.log("cropping_id : "+res.rows.item(rid).croppping_id+" week_id : "+res.rows.item(rid).week_id+" client_user_id: " +res.rows.item(rid).client_user_id+" client_name: "+res.rows.item(rid).client_name+" cropping_created: "+res.rows.item(rid).user_date_created);
-              this.croppingInfo.push({ cropping_id: res.rows.item(rid).croppping_id, week_id: res.rows.item(rid).week_id, client_user_id: res.rows.item(rid).client_user_id , client_name: res.rows.item(rid).client_name , cropping_created: res.rows.item(rid).user_date_created });
+              console.log("cropping_id : "+res.rows.item(rid).croppping_id+" client_user_id: " +res.rows.item(rid).client_user_id+" client_name: "+res.rows.item(rid).client_name+" cropping_created: "+res.rows.item(rid).user_date_created);
+              this.croppingInfo.push({ cropping_id: res.rows.item(rid).croppping_id, client_user_id: res.rows.item(rid).client_user_id , client_name: res.rows.item(rid).client_name , cropping_created: res.rows.item(rid).user_date_created });
             }
+          }
+          else{
+            console.log("nothing");
           }
         }).catch(e => console.log(e.message));
       }).catch(e => console.log(e.message));
@@ -155,9 +159,15 @@ export class HomePage {
   //
   // }
   cropInputActivity(croppingId,userId){
-    sessionStorage.setItem('croppingId',croppingId);
-    sessionStorage.setItem('userid',userId);
-    this.navCtrl.push(CarrotsInputsLaborCostsPage);
+    this.dbServiceProvier.createWeekExpenses(userId,croppingId);
+    console.log("creating week");
+    setTimeout(() => {
+      sessionStorage.setItem('croppingId',croppingId);
+      sessionStorage.setItem('userid',userId);
+      var week_id = sessionStorage.getItem('week_id');
+        console.log("@home.ts cropping id --> "+croppingId+" || userid --> "+userId+" || week_id -->"+week_id);
+        this.navCtrl.push(CarrotsInputsLaborCostsPage);
+    }, 2500);
   }
   showErrorToast(){
   let toast = this.toastCtrl.create({
