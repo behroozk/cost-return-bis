@@ -16,22 +16,29 @@ export class InputCostCalculatorProvider {
   _subtotalLabor:number=0;
   _unitVariableCost:number=0;
   breakEvenPrice:number=0;
+  foodcost: number =0;
   constructor() {
     console.log('Hello InputCostCalculatorProvider Provider');
   }
   emptyValues(){
+    console.log("empty values");
     this.labor_cost=0;
     this.inputValue=0;
-    this._subtotalLabor;
+    this._subtotalLabor=0;
     this.adminValueUnit=0;
+    this.foodcost=0;
   }
-  costPerLabor(mandays,mancost,manpower){
+  costPerLabor(mandays,mancost,manpower){ // cost per labor
     this.labor_cost = (mancost*manpower)*mandays;
     return this.labor_cost;
   }
-  addingCost(inputValues){ // paymentActivity its either input or admin
+  addingCost(inputValues){ // input cost
       this.inputValue += parseInt(inputValues);
       return this.inputValue;
+  }
+  addingFoodCost(inputCost){
+    this.foodcost += parseInt(inputCost);
+    return this.foodcost;
   }
   adminfixedCost(input){
     this.adminValueFixed += parseInt(input);

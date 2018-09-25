@@ -52,6 +52,7 @@ export class CarrotsInputsLaborCostsPage {
   inputLists:any[];
   inputCost:any = [];
   laborLists:any[];
+  payment:any=[];
 
   temporaryArray: any[] = [];
   sortedPaymentList: any[] = [];
@@ -156,7 +157,7 @@ export class CarrotsInputsLaborCostsPage {
     let showPayment = this.modalCtrl.create(PaymentsPage, { laborId: laborId, laborTitle: labor });
     let alert = this.alertCtrl.create({
     title: 'Confirm activity',
-    message: 'Did you do '+labor+'?',
+    message: 'Confirm '+labor+'?',
     buttons: [
       {
         text: 'No',
@@ -315,11 +316,11 @@ export class CarrotsInputsLaborCostsPage {
   //   console.log("yeah :"+this.buttonChoicesMenu);
   //   this.list =[];
   // }
-  spawnModalPage(){
-    this.navCtrl.push(ReviewInputsPage, { labor:this.prelim_data, admin: this.adminObject, input: this.inputObject});
-    // let profileModal = this.modalCtrl.create(ReviewInputsPage, { labor: this.prelim_data, admin: this.adminObject, input: this.inputObject});
-    // profileModal.present();
-  }
+  // spawnModalPage(){
+  //   this.navCtrl.push(ReviewInputsPage, { labor:this.prelim_data, admin: this.adminObject, input: this.inputObject});
+  //   // let profileModal = this.modalCtrl.create(ReviewInputsPage, { labor: this.prelim_data, admin: this.adminObject, input: this.inputObject});
+  //   // profileModal.present();
+  // }
   // registerInputs(){
   //   if(this.vegetable == 'carrots'){
   //     this.inl = this.input_cost.length - 1;

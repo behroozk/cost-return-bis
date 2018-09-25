@@ -46,8 +46,9 @@
       </div>
       <div *ngIf="payment.id == 1">
         <ion-item *ngFor="let labor of laborLists">
-          <ion-label stacked>{{ labor.laborActivity}} Cost</ion-label>
-          <ion-input [(ngModel)]="laborCost[labor.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
+          <ion-label stacked>{{ labor.laborActivity}}</ion-label>
+          <ion-input *ngIf="labor.id == 0 || labor.id == 1" [(ngModel)]="laborCost[labor.id]" type="number" pattern="[0-9]*" value="{{ default }}"></ion-input>
+          <ion-input *ngIf="labor.id == 2" [(ngModel)]="laborCost[labor.id]" type="number" pattern="[0-9]*" value="{{ default_Pay }}"></ion-input>
         </ion-item>
       </div>
       <div *ngIf="payment.id == 2">

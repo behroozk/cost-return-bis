@@ -11,6 +11,7 @@ import { InputCostCalculatorProvider } from '../providers/input-cost-calculator/
 import { VegetableCostListsProvider } from '../providers/vegetable-cost-lists/vegetable-cost-lists';
 import { DatabaseServicesProvider } from '../providers/database-services/database-services';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -26,6 +27,7 @@ import { CostEditViewPage } from '../pages/cost-edit-view/cost-edit-view';
 import { LoginPage } from '../pages/login/login';
 import { ClientInfoPage } from '../pages/client-info/client-info';
 import { PaymentsPage } from '../pages/payments/payments';
+import { WeekrecordsPage } from '../pages/weekrecords/weekrecords';
 
 //Modules
 import { ChooseVegetablePageModule } from '../pages/choose-vegetable/choose-vegetable.module';
@@ -40,6 +42,7 @@ import { CostEditViewPageModule } from '../pages/cost-edit-view/cost-edit-view.m
 import { LoginPageModule } from '../pages/login/login.module';
 import { ClientInfoPageModule } from '../pages/client-info/client-info.module';
 import { PaymentsPageModule } from '../pages/payments/payments.module';
+import { WeekrecordsPageModule } from '../pages/weekrecords/weekrecords.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,7 @@ import { PaymentsPageModule } from '../pages/payments/payments.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp,IonicModule.forRoot(MyApp)),
+    IonicStorageModule.forRoot(),
     ChooseVegetablePageModule,
     CarrotsInputsLaborCostsPageModule,
     ReviewInputsPageModule,
@@ -71,7 +75,8 @@ import { PaymentsPageModule } from '../pages/payments/payments.module';
     LoginPageModule,
     ClientInfoPageModule,
     ReactiveFormsModule,
-    PaymentsPageModule
+    PaymentsPageModule,
+    WeekrecordsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -88,7 +93,8 @@ import { PaymentsPageModule } from '../pages/payments/payments.module';
     CostEditViewPage,
     LoginPage,
     ClientInfoPage,
-    PaymentsPage
+    PaymentsPage,
+    WeekrecordsPage
   ],
   providers: [
     StatusBar,

@@ -37,14 +37,21 @@ export class ReviewInputsPage {
   labor:any;
   admin:any;
 
+  public foodSubtotal:any;
+
   inputBool:boolean;
   laborBool:boolean;
-  adminBool:boolean;
+  foodBool:boolean;
   showOutput:boolean = false;
   private clientCreatorDataHolder:any;
   private storeInput:any;
   private storeLabor:any;
   private storeAdmin:any;
+
+  private finalInput:any;
+  private finalLabor:any;
+  private finalFood:any;
+
   // inputLen:any;
   // laborLen:any;
   private cropId:any;
@@ -64,7 +71,7 @@ export class ReviewInputsPage {
   private expected_kilo_carrots:number = 45;
   private dateToday:any;
   _client_id:any;
-  _majorCosts: { id: number, costName: string }[];
+  // _majorCosts: { id: number, costName: string }[];
   _subLaborCosts=0;
   // lastID = { rowid: 0};
   vegetable = '';
@@ -95,24 +102,47 @@ export class ReviewInputsPage {
       // console.log(this.maxLength);
   }
   ionViewWillEnter(){
+
+    this.calculator.emptyValues();
+    var crop_Id = sessionStorage.getItem('croppingId');
+    // var user_Id = sessionStorage.getItem('userid');
+    var week_id = sessionStorage.getItem('week_id');
     var date = new Date();
     var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     this.dateToday = monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
+    this.dbServiceProvier.selectPresentWeekData(week_id,crop_Id); // it will call again error something dari dapita
     // this.dbServiceProvier.insertClientDataHolder(this.userId,this.cropId,this.dateToday);
     // console.log("RETURN ID : "+this.clientCreatorDataHolder);
+
     let loading = this.loadingCtrl.create({
           content: `
       <div class="custom-spinner-container">
         <div class="custom-spinner-box">
-          Calculating and saving values..Please wait
+          Collecting data ..
         </div>
       </div>`,
         });
     setTimeout(() => {
-        // this.calculateValues();
         loading.dismiss();
+        var parseInput = sessionStorage.getItem('input');
+        var parseLabor = sessionStorage.getItem('labor');
+        var parseFood = sessionStorage.getItem('food');
+        this.finalInput = JSON.parse(parseInput);
+        this.finalLabor = JSON.parse(parseLabor);
+        this.finalFood = JSON.parse(parseFood);
+        // console.log("@review-input.ts parseInput ->"+parseInput+" parsed input ->"+this.finalInput+" checked length ->"+parseInput.length+ " checked parse length ->"+this.finalInput.length);
+        // this.storage.get('input').then((val1) => {
+        //   this.finalInput = val1;
+        //   console.log("nani ?! ->"+JSON.parse(this.finalInput));
+        // });
+        // this.storage.get('labor').then((val2) => {
+        //   this.finalLabor = JSON.parse(val2);
+        // });
+        // this.storage.get('food').then((val3) => {
+        //   this.finalFood = JSON.parse(val3);
+        // });
+        this.calculateValues(this.finalInput,this.finalLabor,this.finalFood);
       }, 5000);
-    // this.getCarrotsCostList();
     loading.present();
   }
   getCarrotsCostList() {
@@ -120,11 +150,40 @@ export class ReviewInputsPage {
     this.inputLists = this.carrotProvider.carrotsInputListProvider();
     this.adminCostLists = this.carrotProvider.carrotsAdminListProvider();
   }
-
-  public calculateValues(){
+  public calculateValues(input,labor,food){
+    this.maxLength = Math.max(input.length,labor.length,food.length);
+    this.inputBool = this.calculator.isEmpty(input); // check if array is empty
+    this.laborBool = this.calculator.isEmpty(labor);
+    this.foodBool = this.calculator.isEmpty(food);
+    console.log("input boolean -->" +this.inputBool+" labor boolean --> "+this.laborBool+" food boolean "+this.foodBool);
+    console.log("max length -->" +this.maxLength+" input length -->" +this.finalInput.length+" labor length -->"+this.finalLabor.length+" food length -->"+this.finalFood.length);
     for(var i=0; i < this.maxLength; i++){
       this.accessObjectValues(i);
     }
+  }
+  private accessObjectValues(key){
+    if(!this.inputBool && key < this.finalInput.length ){
+      console.log("@review-input.ts --> input cost : "+this.finalInput[key].inputcost);
+      this.inputSubtotalCost = this.calculator.addingCost(this.finalInput[key].inputcost);
+    }
+    if(!this.laborBool && key < this.finalLabor.length ) {
+      this.laborPerLaborTotalCost = this.calculator.costPerLabor(this.finalLabor[key].mandays,this.finalLabor[key].mancost,this.finalLabor[key].manpower);
+      this.laborSubtotalCost = this.calculator.subTotalLabor(this.laborPerLaborTotalCost);
+    }
+    if(!this.foodBool && key < this.finalFood.length ) {
+      this.foodSubtotal = this.calculator.addingFoodCost(this.finalFood[key].foodcost);
+    }
+    // if(!this.adminBool && key < this.admin.length ) {
+    //   if(this.admin[key].id >= 0 && this.admin[key].id <= 3){
+    //     this.adminFixedSubtotalCost = this.calculator.adminfixedCost(this.admin[key].cost);
+    //   }
+    //   else{
+    //     this.adminUnitSubtotalCost = this.calculator.adminunitCost(this.admin[key].cost);
+    //   }
+    //   // this.dbServiceProvier.insertAdminExpenses(this.admin[key].inputName,this.admin[key].cost,this.cropId);
+    //   this.adminViewTotalCost = this.adminFixedSubtotalCost + this.adminUnitSubtotalCost;
+    // }
+
   }
   showMenu(){
     this.navCtrl.popToRoot();
@@ -166,28 +225,7 @@ export class ReviewInputsPage {
     // console.log("store input :"+this.storeInput);
 
 }
-  private accessObjectValues(key){
-    if(!this.inputBool && key < this.input.length ){
-      this.inputSubtotalCost = this.calculator.addingCost(this.input[key].cost);
-      this.dbServiceProvier.insertInputExpenses(this.input[key].inputName,this.input[key].cost,this.cropId);
-    }
-    if(!this.laborBool && key < this.labor.length ) {
-      this.laborPerLaborTotalCost = this.calculator.costPerLabor(this.labor[key].mandays,this.labor[key].mancost,this.labor[key].manpower);
-      this.laborSubtotalCost = this.calculator.subTotalLabor(this.laborPerLaborTotalCost);
-      this.dbServiceProvier.insertLaborExpenses(this.labor[key].manpower,this.labor[key].mancost,this.labor[key].mandays,this.labor[key].laborname,this.cropId,);
-    }
-    if(!this.adminBool && key < this.admin.length ) {
-      if(this.admin[key].id >= 0 && this.admin[key].id <= 3){
-        this.adminFixedSubtotalCost = this.calculator.adminfixedCost(this.admin[key].cost);
-      }
-      else{
-        this.adminUnitSubtotalCost = this.calculator.adminunitCost(this.admin[key].cost);
-      }
-      this.dbServiceProvier.insertAdminExpenses(this.admin[key].inputName,this.admin[key].cost,this.cropId);
-      this.adminViewTotalCost = this.adminFixedSubtotalCost + this.adminUnitSubtotalCost;
-    }
 
-  }
   showBreakEven(){
     this.showOutput = true;
     let promptAlert = this.alertCtrl.create({
@@ -235,8 +273,6 @@ export class ReviewInputsPage {
     console.log("unit cost : "+store);
     console.log("break even : "+this.calculator.breakEven(this.adminFixedSubtotalCost,store,this.unitProd));
   }
-  ionViewWillLoad() {
-
     // console.log('ionViewDidLoad ReviewInputsPage');
     // // this.showLegends();
     // this.vegetable = sessionStorage.getItem('vegetable');
@@ -293,7 +329,6 @@ export class ReviewInputsPage {
     //   { "id" : 14, "costName" : this._arrays._storeArray6[3]},
     //   { "id" : 15, "costName" : this._arrays._storeArray6[4]}];
     // }
-  }
  exitPage(){
     // let promptAlert = this.alertCtrl.create({
     //   title: 'Expected price and expected harvest in kilo',
@@ -337,7 +372,7 @@ export class ReviewInputsPage {
     // promptAlert.present();
   }
   showDetailedCosts(){
-    let profileModal = this.modalCtrl.create(SummaryInputsPage, { labor: this.labor, admin: this.admin, input: this.input});
+    let profileModal = this.modalCtrl.create(SummaryInputsPage);
     profileModal.present();
   }
   saveDataInputs(){

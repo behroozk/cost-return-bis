@@ -7,14 +7,17 @@
 <ion-content>
   <div *ngIf="!inputBool">
     <ion-list>
-      <ion-item *ngFor="let input of input">
+      <ion-item *ngFor="let input of printInputs">
         <ion-grid>
           <ion-row>
-            <ion-col col-6>
-              {{ input.inputName }}
+            <ion-col col-4>
+              {{ input.laborname }}
             </ion-col>
-            <ion-col col-6>
-              {{ input.cost }}
+            <ion-col col-4 style="white-space:normal;">
+              {{ input.inputname }}
+            </ion-col>
+            <ion-col col-4>
+              {{ input.inputcost }}
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -36,22 +39,34 @@
   <div *ngIf="!laborBool">
     <ion-list>
       <div *ngFor="let arrayLabor of laborArray">
-        <div *ngFor="let labor of labor">
-        <ion-item *ngIf="labor.id == arrayLabor.id">
           <ion-grid>
             <ion-list>
             <ion-row>
-              {{ labor.laborname }}
+              {{ arrayLabor.laborname }}
             </ion-row>
             <ion-row>
               <ion-col col-3>
-                {{ labor.mandays }}
+                MD
               </ion-col>
               <ion-col col-3>
-                {{ labor.mancost }}
+                MC
               </ion-col>
               <ion-col col-3>
-                {{ labor.manpower }}
+                MP
+              </ion-col>
+              <ion-col col-3>
+                CPL
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-3>
+                {{ arrayLabor.mandays }}
+              </ion-col>
+              <ion-col col-3>
+                {{ arrayLabor.mancost }}
+              </ion-col>
+              <ion-col col-3>
+                {{ arrayLabor.manpower }}
               </ion-col>
               <ion-col col-3>
                 {{ arrayLabor.costPerLabor }}
@@ -59,8 +74,6 @@
             </ion-row>
           </ion-list>
           </ion-grid>
-        </ion-item>
-        </div>
       </div>
       <ion-item>
         <ion-grid>
@@ -76,7 +89,35 @@
       </ion-item>
     </ion-list>
   </div>
-  <div *ngIf="!adminBool">
+  <div *ngIf="!foodBol">
+    <ion-list>
+      <ion-item *ngFor="let pFood of printFood">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              {{ pFood.laborname }}
+            </ion-col>
+            <ion-col col-6>
+              {{ pFood.foodcost }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-8>
+              Subtotal of Food Costs
+            </ion-col>
+            <ion-col col-4>
+              {{ foodSubtotal }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </div>
+  <!-- <div *ngIf="!adminBool">
     <ion-list>
       <ion-item *ngFor="let admin of admin">
         <ion-grid>
@@ -103,6 +144,6 @@
         </ion-grid>
       </ion-item>
     </ion-list>
-  </div>
+  </div> -->
   <button ion-button full (click)="backHome()">Done</button>
 </ion-content>

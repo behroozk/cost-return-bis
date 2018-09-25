@@ -21,31 +21,51 @@
     </div>
   </div> -->
   <div *ngIf="userList">
-    <ion-item *ngFor="let clients of client_list">
+    <ion-list *ngFor="let clients of client_list">
       <!-- <ion-label>{{ clients.name }}</ion-label> -->
       <button ion-button full round color="dark" (click)="userClicked(clients.client_id)">{{ clients.name }}</button>
-    </ion-item>
+    </ion-list>
   </div>
   <div *ngIf="!userList">
-    <p>Test</p>
-    <div *ngIf="croppingInfo">
+    <div *ngIf="croppingInfo" text-center>
 
-      <ion-item *ngFor="let cropInfo of croppingInfo">
+      <ion-list>
+        <ion-card *ngFor="let cropInfo of croppingInfo; let i=index">
+        <ion-item-sliding #item>
+          <ion-item>
+              <ion-card-content>
+                <small>Crop {{ i+1 }}</small>
+              </ion-card-content>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="cropInputActivity(cropInfo.cropping_id,cropInfo.client_user_id)"><small>Add Week Activity</small></button>
+            <button ion-button color="secondary" (click)="viewWeekActivity(cropInfo.cropping_id,cropInfo.client_user_id)"><small>View All Week Activity</small></button>
+          </ion-item-options>
+          <ion-item-options side="left">
+            <button ion-button color="warning"><small>Archive</small></button>
+          </ion-item-options>
+        </ion-item-sliding>
+        </ion-card>
+      </ion-list>
+      <!-- <ion-list> -->
+
+
+
+
         <!-- <ion-label>{{ clients.name }}</ion-label> -->
-        <button ion-button full round color="dark" (click)="cropInputActivity(cropInfo.cropping_id,cropInfo.client_user_id)">Cropping start at {{ cropInfo.cropping_created }}</button>
         <!-- <button ion-button full round color="dark" (click)="viewDatabase(cropInfo.cropping_id,cropInfo.client_user_id,cropInfo.week_id)">View details of the cropping start at {{ cropInfo.cropping_created }}</button> -->
-      </ion-item>
+
     </div>
     <div *ngIf="!croppingInfo">
       <p>Empty</p>
     </div>
   </div>
-  <ion-footer no-border>
+  <ion-footer>
   <ion-toolbar>
-    <button *ngIf="userList" ion-button full round icon-start (click)="promptClientInfo()">
+    <button *ngIf="userList" ion-button full icon-start style="padding:20px" (click)="promptClientInfo()">
       <ion-icon name="add-circle"></ion-icon>
       Register New User</button>
-    <button *ngIf="!userList" ion-button full round icon-start (click)="addNewCroppingCycle()">
+    <button *ngIf="!userList" ion-button full round icon-start style="padding:20px" (click)="addNewCroppingCycle()">
       <ion-icon name="add-circle"></ion-icon>
         Add new cropping cycle</button>
   </ion-toolbar>

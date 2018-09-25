@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ToastController, LoadingController, ViewController } from 'ionic-angular';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+// import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 import { InputCostCalculatorProvider } from '../../providers/input-cost-calculator/input-cost-calculator';
 import { VegetableCostListsProvider } from '../../providers/vegetable-cost-lists/vegetable-cost-lists';
@@ -27,7 +27,7 @@ export class SummaryInputsPage {
   private admin:any = [];
   private inputBool:boolean;
   private laborBool:boolean;
-  private adminBool:boolean;
+  private foodBool:boolean;
   private laborArray:any = [];
   private maxLength:any;
 
@@ -40,6 +40,10 @@ export class SummaryInputsPage {
   private adminUnitSubtotalCost:number = 0;
   private adminFixedSubtotalCost:number = 0;
   private adminViewTotalCost:number = 0;
+  public foodSubtotal:any;
+  public seeInput:any;
+  public seeLabor:any;
+  public seeFood:any;
 
   _laborCost='';
   price_per_kilo: number;
@@ -51,6 +55,9 @@ export class SummaryInputsPage {
   _roiPercentage: number;
   _rowId: any;
   public vegetable:any;
+
+  public printInputs:any = [];
+  public printFood:any = [];
   constructor(
     private calculator: InputCostCalculatorProvider,
     public carrotProvider: VegetableCostListsProvider,
@@ -58,18 +65,11 @@ export class SummaryInputsPage {
     public navParams: NavParams,
     public _arrays: ArrayStorage,
     public data: DataProvider,
-    private sqlite: SQLite,
+    // private sqlite: SQLite,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private viewCtrl: ViewController) {
-      this.input = this.navParams.get('input');
-      this.labor = this.navParams.get('labor');
-      this.admin = this.navParams.get('admin');
-      this.inputBool = this.calculator.isEmpty(this.input); // check if array is empty
-      this.laborBool = this.calculator.isEmpty(this.labor);
-      this.adminBool = this.calculator.isEmpty(this.admin);
-      this.calculator.emptyValues();
-      this.maxLength = Math.max(this.input.length,this.labor.length,this.admin.length);
+
   }
   getCarrotsCostList() {
     this.carrotsLaborList = this.carrotProvider.carrotsLaborListProvider();
@@ -83,53 +83,83 @@ export class SummaryInputsPage {
     // this.calculateOutput();
   }
   private accessObjectValues(key){
-    if(!this.inputBool && key < this.input.length ){
-      this.inputSubtotalCost = this.calculator.addingCost(this.input[key].cost);
+    if(!this.inputBool && key < this.seeInput.length ){
+      this.inputSubtotalCost = this.calculator.addingCost(this.seeInput[key].inputcost);
+      this.printInputs.push({ laborname: this.seeInput[key].laborname, inputname: this.seeInput[key].inputname, inputcost: this.seeInput[key].inputcost });
     }
-    if(!this.laborBool && key < this.labor.length ) {
-      this.laborPerLaborTotalCost = this.calculator.costPerLabor(this.labor[key].mandays,this.labor[key].mancost,this.labor[key].manpower);
-      this.laborArray.push({ id: this.labor[key].id, costPerLabor: this.laborPerLaborTotalCost});
+    if(!this.laborBool && key < this.seeLabor.length ) {
+      this.laborPerLaborTotalCost = this.calculator.costPerLabor(this.seeLabor[key].mandays,this.seeLabor[key].mancost,this.seeLabor[key].manpower);
+      this.laborArray.push({ laborname: this.seeLabor[key].laborname, mandays:this.seeLabor[key].mandays, mancost:this.seeLabor[key].mancost , manpower: this.seeLabor[key].manpower ,costPerLabor: this.laborPerLaborTotalCost});
       this.laborSubtotalCost = this.calculator.subTotalLabor(this.laborPerLaborTotalCost);
     }
-    if(!this.adminBool && key < this.admin.length ) {
-      if(this.admin[key].id >= 0 && this.admin[key].id <= 3){
-        this.adminFixedSubtotalCost = this.calculator.adminfixedCost(this.admin[key].cost);
-      }
-      else{
-        this.adminUnitSubtotalCost = this.calculator.adminunitCost(this.admin[key].cost);
-      }
-      this.adminViewTotalCost = this.adminFixedSubtotalCost + this.adminUnitSubtotalCost;
+    if(!this.foodBool && key < this.seeFood.length ) {
+      this.foodSubtotal = this.calculator.addingFoodCost(this.seeFood[key].foodcost);
+      this.printFood.push({ laborname: this.seeFood[key].laborname, foodcost: this.seeFood[key].foodcost})
     }
+    // if(!this.adminBool && key < this.admin.length ) {
+    //   if(this.admin[key].id >= 0 && this.admin[key].id <= 3){
+    //     this.adminFixedSubtotalCost = this.calculator.adminfixedCost(this.admin[key].cost);
+    //   }
+    //   else{
+    //     this.adminUnitSubtotalCost = this.calculator.adminunitCost(this.admin[key].cost);
+    //   }
+    //   this.adminViewTotalCost = this.adminFixedSubtotalCost + this.adminUnitSubtotalCost;
+    // }
   }
   ionViewDidLoad() {
+
     this.vegetable = sessionStorage.getItem('vegetable');
     console.log("gulay :" +this.vegetable);
     console.log('ionViewDidLoad SummaryInputsPage');
   }
   ionViewDidEnter() {
-    this.getCarrotsCostList();
-    this.calculateValues();
     let loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: `
         <div class="custom-spinner-container">
-          <div class="custom-spinner-box">Calculating...</div>
+          <div class="custom-spinner-box">Loading...</div>
         </div>`,
-        duration: 1500
-    });
+        });
+    var parseInput = sessionStorage.getItem('input');
+    var parseLabor = sessionStorage.getItem('labor');
+    var parseFood = sessionStorage.getItem('food');
+
+    this.seeInput = JSON.parse(parseInput);
+    this.seeLabor = JSON.parse(parseLabor);
+    this.seeFood = JSON.parse(parseFood);
+    this.inputBool = this.calculator.isEmpty(this.seeInput); // check if array is empty
+    this.laborBool = this.calculator.isEmpty(this.seeLabor);
+    this.foodBool = this.calculator.isEmpty(this.seeFood);
+    console.log("input boolean -->" +this.inputBool+" labor boolean --> "+this.laborBool+" food boolean "+this.foodBool);
     loading.present();
-    // this._totalCost = this._arrays._storeArray4; // total cost inputs,fertilizer
-    this._laborCost = this.navParams.get('laborCost');  // total labor costs
-    this.price_per_kilo = this.navParams.get('price_kilo_carrots');
-    this.harvest_kilo = this.navParams.get('expected_kilo_carrots');
-    this._rowId = sessionStorage.getItem('client_id');
-    this._cost = this.data.costCalculator(this._arrays._storeArray4[0],this._laborCost,this._arrays._storeArray4[1]);
-    this._gain = this.data.gainCalculator(this.price_per_kilo,this.harvest_kilo);
-    this._roi = this.data.returnOfInvestmentValue(this._cost,this._gain);
-    this._roiPercentage = this.data.numToPercentage(this._roi);
-    this._returnMoney = this.data.moneyReturn(this._roi,this._cost);
-    console.log("cost : " +this._cost+ " gain :" +this._gain + " roi : " +this._roi + "rowid : " +this._rowId);
-    this.saveData();
+    setTimeout(() => {
+      loading.dismiss();
+      this.calculator.emptyValues();
+      this.maxLength = Math.max(this.seeInput.length,this.seeLabor.length,this.seeFood.length);
+      this.getCarrotsCostList();
+      this.calculateValues();
+    },2500);
+    // let loading = this.loadingCtrl.create({
+    //   spinner: 'hide',
+    //   content: `
+    //     <div class="custom-spinner-container">
+    //       <div class="custom-spinner-box">Calculating...</div>
+    //     </div>`,
+    //     duration: 1500
+    // });
+    // loading.present();
+    // // this._totalCost = this._arrays._storeArray4; // total cost inputs,fertilizer
+    // this._laborCost = this.navParams.get('laborCost');  // total labor costs
+    // this.price_per_kilo = this.navParams.get('price_kilo_carrots');
+    // this.harvest_kilo = this.navParams.get('expected_kilo_carrots');
+    // this._rowId = sessionStorage.getItem('client_id');
+    // this._cost = this.data.costCalculator(this._arrays._storeArray4[0],this._laborCost,this._arrays._storeArray4[1]);
+    // this._gain = this.data.gainCalculator(this.price_per_kilo,this.harvest_kilo);
+    // this._roi = this.data.returnOfInvestmentValue(this._cost,this._gain);
+    // this._roiPercentage = this.data.numToPercentage(this._roi);
+    // this._returnMoney = this.data.moneyReturn(this._roi,this._cost);
+    // console.log("cost : " +this._cost+ " gain :" +this._gain + " roi : " +this._roi + "rowid : " +this._rowId);
+    // this.saveData();
   }
   saveData(){
     // if(this.vegetable == 'carrots'){

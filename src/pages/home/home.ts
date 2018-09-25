@@ -3,6 +3,7 @@ import { NavController , LoadingController, ToastController, ModalController, Po
 
 // import { ChooseVegetablePage } from '../choose-vegetable/choose-vegetable';
 import { PopoverPage } from '../popover/popover';
+import { WeekrecordsPage } from '../weekrecords/weekrecords';
 import { DatabaseServicesProvider } from '../../providers/database-services/database-services';
 import { CarrotsInputsLaborCostsPage } from '../carrots-inputs-labor-costs/carrots-inputs-labor-costs';
 import { ShowDataPage } from '../show-data/show-data';
@@ -98,18 +99,18 @@ export class HomePage {
   userClicked(client_id){
     this.userList = false;
     this.enteredClient = client_id;
-    this.showCroppingList(client_id);
+    this.showCroppingList();
   }
 
-  showCroppingList(client_id){
-    console.log("@homets.SHOWCROPPINGLIST --> client id : "+client_id);
+  showCroppingList(){
+    console.log("@homets.SHOWCROPPINGLIST --> client id : "+this.enteredClient);
     this.croppingInfo = [];
     this.sqlite.create({
         name: 'ionicdb.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         // db.executeSql('SELECT * FROM client_details INNER JOIN cropping ON client_details.rowid = cropping.client_user_id INNER JOIN week ON cropping.croppping_id = week.cropping_id', {})
-          db.executeSql('SELECT * FROM cropping INNER JOIN client_details ON cropping.client_user_id = client_details.rowid WHERE client_details.rowid = "'+client_id+'"', {})
+          db.executeSql('SELECT * FROM cropping INNER JOIN client_details ON cropping.client_user_id = client_details.rowid WHERE client_details.rowid = "'+this.enteredClient+'"', {})
         .then(res => {
           if(res.rows.length > 0){
             for(let rid=0; rid < res.rows.length; rid++){
@@ -122,9 +123,6 @@ export class HomePage {
           }
         }).catch(e => console.log(e.message));
       }).catch(e => console.log(e.message));
-  }
-  viewDatabase(cropping_id,user_id,week_id){
-    this.dbServiceProvier.showConnectedData(user_id,cropping_id,week_id);
   }
   addNewCroppingCycle(){
     console.log("client : "+this.enteredClient)
@@ -148,25 +146,36 @@ export class HomePage {
         saveCroppingCylce.dismiss();
       }, 5000);
   }
-  // saveClientInformation(){
-  //   // this.dbServiceProvier.showAllUser();
-  // //
-  // // console.log(this.client[1]+'","'+this.client[2]+'","'+this.client[3]+'","'+this.client[0]+'","'+this._dateToday);
-  // //   db.executeSql('INSERT INTO client_details(client_land,client_age,client_location,client_name,user_date_created) VALUES("'+this.client[0]+'","'+this.client[2]+'","'+this.client[3]+'","'+this.client[1]+'","'+this._dateToday+'")', {})
-  // //   .then(res => {
-  // //     console.log("client details saved");
-  // //   }).catch(e => console.log(JSON.stringify(e)));
-  //
-  // }
+  viewWeekActivity(cropid,userid){
+    this.dbServiceProvier.viewAllWeekActivity(cropid,userid);
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Preparing data...'
+    });
+    loading.present();
+    setTimeout(() => {
+      loading.dismiss();
+      this.navCtrl.push(WeekrecordsPage);
+    },2500);
+  }
   cropInputActivity(croppingId,userId){
     this.dbServiceProvier.createWeekExpenses(userId,croppingId);
     console.log("creating week");
+    let creatingWeek = this.loadingCtrl.create({
+          content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">
+          Creating week expense..
+        </div>
+      </div>`,});
+      creatingWeek.present();
     setTimeout(() => {
       sessionStorage.setItem('croppingId',croppingId);
       sessionStorage.setItem('userid',userId);
       var week_id = sessionStorage.getItem('week_id');
         console.log("@home.ts cropping id --> "+croppingId+" || userid --> "+userId+" || week_id -->"+week_id);
         this.navCtrl.push(CarrotsInputsLaborCostsPage);
+        creatingWeek.dismiss();
     }, 2500);
   }
   showErrorToast(){
